@@ -1,5 +1,6 @@
 import LandingHeader from '../features/landing/header/Header';
 import Hero from '../features/landing/hero/Hero';
+import PrimaryFeatures from '../features/landing/primary/Primary';
 
 export default function LandingPage() {
   return (
@@ -7,7 +8,7 @@ export default function LandingPage() {
       <LandingHeader />
       <main>
         <Hero />
-        {/* PrimaryFeatures */}
+        <PrimaryFeatures />
         {/* SecondaryFeatures */}
         {/* CallToAction */}
         {/* Testimonials */}
