@@ -1,9 +1,11 @@
-export function LandingPage() {
+import Hero from '../features/landing/hero/Hero';
+
+export default function LandingPage() {
   return (
     <>
       {/* Header */}
       <main>
-        {/* Hero */}
+        <Hero />
         {/* PrimaryFeatures */}
         {/* SecondaryFeatures */}
         {/* CallToAction */}
