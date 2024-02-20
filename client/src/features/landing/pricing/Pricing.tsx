@@ -2,7 +2,7 @@ import Container from '../../../components/shared/Container/Container';
 import SwirlyDoodle from './SwirlyDoodle';
 import Plan from './Plan';
 
-export function Pricing() {
+export default function Pricing() {
   return (
     <section
       id="pricing"
