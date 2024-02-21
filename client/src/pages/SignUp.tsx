@@ -1,5 +1,4 @@
 import { Outlet } from 'react-router-dom';
-import StepOne from '../features/signup/StepOne';
 import Button from '../components/shared/Button/Button';
 import GitHubIcon from '../components/shared/Icons/GitHubIcon';
 import GoogleIcon from '../components/shared/Icons/GoogleIcon';
