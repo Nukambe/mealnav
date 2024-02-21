@@ -1,5 +1,6 @@
 import { useRouteError } from 'react-router-dom';
 import SlimLayout from '../components/shared/SlimLayout/SlimLayout';
+import Button from '../components/shared/Button/Button';
 
 export default function ErrorPage() {
   const error: any = useRouteError();
@@ -19,7 +20,9 @@ export default function ErrorPage() {
       <p className="mt-3 text-sm text-gray-700">
         <i>{error.statusText || error.message}</i>
       </p>
-      <button className="mt-10">Go back home</button>
+      <Button className="mt-10" link="/">
+        Go back home
+      </Button>
     </SlimLayout>
   );
 }

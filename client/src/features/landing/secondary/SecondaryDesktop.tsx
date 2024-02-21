@@ -4,7 +4,7 @@ import { features } from './secondaryFeatures';
 import SecondaryFeature from './SecondaryFeature';
 
 export default function FeaturesDesktop() {
-  const [selectedIndex, setSelectedIndex] = React.useState(0);
+  const [selectedIndex] = React.useState(0);
 
   return (
     <div className="hidden lg:mt-20 lg:block">

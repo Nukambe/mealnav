@@ -7,9 +7,9 @@ export default function LandingHeader() {
       <Container>
         <nav className="relative z-50 flex justify-between">
           <div className="flex items-center md:gap-x-12">
-            <a href="#" aria-label="Home">
+            <Button link="/" aria-label="Home">
               {/* <Logo className="h-10 w-auto" /> */}
-            </a>
+            </Button>
             <div className="hidden md:flex md:gap-x-6">
               <a href="#features">Features</a>
               <a href="#testimonials">Testimonials</a>
@@ -20,7 +20,7 @@ export default function LandingHeader() {
             <div className="hidden md:block">
               <a href="/login">Sign in</a>
             </div>
-            <Button href="/register" color="blue">
+            <Button link="/signup" color="blue">
               <span>
                 Get started <span className="hidden lg:inline">today</span>
               </span>

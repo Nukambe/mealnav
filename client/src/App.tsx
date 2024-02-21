@@ -1,6 +1,3 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
 import LandingPage from './pages/LandingPage';
 import './App.css';
 
