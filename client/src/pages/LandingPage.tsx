@@ -6,6 +6,7 @@ import CallToAction from '../features/landing/call/CallToAction';
 import Testimonials from '../features/landing/testimonials/Testimonials';
 import Pricing from '../features/landing/pricing/Pricing';
 import Faq from '../features/landing/faq/Faq';
+import Footer from '../features/landing/footer/Footer';
 
 export default function LandingPage() {
   return (
@@ -20,7 +21,7 @@ export default function LandingPage() {
         <Pricing />
         <Faq />
       </main>
-      {/* Footer */}
+      <Footer />
     </>
   );
 }
