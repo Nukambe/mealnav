@@ -37,6 +37,6 @@ export const routes = createBrowserRouter([
     path: '/app',
     element: <App />,
     errorElement: <ErrorPage />,
-    children: [{ path: 'calendar', element: <CalendarPage /> }],
+    children: [{ path: '', element: <CalendarPage /> }],
   },
 ]);

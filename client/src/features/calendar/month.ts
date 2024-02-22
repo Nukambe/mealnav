@@ -33,7 +33,7 @@ export class Month {
   private fillNextMonth() {
     const days = 6 - this.lastDay.getDay();
     for (let i = 1; i <= days; i++) {
-      this.days.push(new Date(this.year, this.month, i));
+      this.days.push(new Date(this.year, this.month + 1, i));
     }
   }
 

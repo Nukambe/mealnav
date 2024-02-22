@@ -1,15 +1,25 @@
 import React from 'react';
 import clsx from 'clsx';
+import CalendarNav from './CalendarNav';
 import ChevronLeft from '../../components/shared/Icons/ChevronLeft';
 import { Month } from './month';
 
 const today = new Date();
 
-export default function Calendar() {
+export default function Calendar({
+  selectedDate,
+  setSelectedDate,
+}: {
+  selectedDate: Date | null;
+  setSelectedDate: React.Dispatch<React.SetStateAction<Date | null>>;
+}) {
   const [currentMonth, setCurrentMonth] = React.useState(today.getMonth());
   const [currentYear, setCurrentYear] = React.useState(today.getFullYear());
-  const [selectedDate, setSelectedDate] = React.useState<Date | null>(today);
   const [month, setMonth] = React.useState<Month | null>(null);
+
+  React.useEffect(() => {
+    setSelectedDate(today);
+  }, [setSelectedDate]);
 
   React.useEffect(() => {
     setMonth(new Month(currentMonth, currentYear));
@@ -17,6 +27,12 @@ export default function Calendar() {
 
   return (
     <div className="mt-10 text-center lg:col-start-8 lg:col-end-13 lg:row-start-1 lg:mt-9 xl:col-start-9">
+      <CalendarNav
+        currentMonth={currentMonth}
+        setCurrentMonth={setCurrentMonth}
+        currentYear={currentYear}
+        setCurrentYear={setCurrentYear}
+      />
       <div className="mt-6 grid grid-cols-7 text-xs leading-6 text-gray-500">
         <div>S</div>
         <div>M</div>
@@ -66,7 +82,7 @@ export default function Calendar() {
         type="button"
         className="mt-8 w-full rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
       >
-        Add event
+        Add meal
       </button>
     </div>
   );
