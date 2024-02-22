@@ -2,7 +2,6 @@ import { useLocation } from 'react-router-dom';
 import clsx from 'clsx';
 import ChevronLeft from '../../components/shared/Icons/ChevronLeft';
 import { steps } from './steps';
-import Button from '../../components/shared/Button/Button';
 
 export default function StepDisplay({ ...props }) {
   const location = useLocation();

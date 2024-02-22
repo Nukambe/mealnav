@@ -7,6 +7,7 @@ import StepOne from './features/signup/StepOne';
 import StepTwo from './features/signup/StepTwo';
 import StepThree from './features/signup/StepThree';
 import StepFour from './features/signup/StepFour';
+import SignIn from './pages/SignIn';
 
 export const routes = createBrowserRouter([
   {
@@ -24,5 +25,10 @@ export const routes = createBrowserRouter([
       { path: 'step-three', element: <StepThree /> },
       { path: 'step-four', element: <StepFour /> },
     ],
+  },
+  {
+    path: '/signin',
+    element: <SignIn />,
+    errorElement: <ErrorPage />,
   },
 ]);
