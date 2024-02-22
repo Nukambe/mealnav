@@ -8,11 +8,13 @@ import StepTwo from './features/signup/StepTwo';
 import StepThree from './features/signup/StepThree';
 import StepFour from './features/signup/StepFour';
 import SignIn from './pages/SignIn';
+import LandingPage from './pages/LandingPage';
+import CalendarPage from './pages/CalendarPage';
 
 export const routes = createBrowserRouter([
   {
     path: '/',
-    element: <App />,
+    element: <LandingPage />,
     errorElement: <ErrorPage />,
   },
   {
@@ -30,5 +32,11 @@ export const routes = createBrowserRouter([
     path: '/signin',
     element: <SignIn />,
     errorElement: <ErrorPage />,
+  },
+  {
+    path: '/app',
+    element: <App />,
+    errorElement: <ErrorPage />,
+    children: [{ path: 'calendar', element: <CalendarPage /> }],
   },
 ]);

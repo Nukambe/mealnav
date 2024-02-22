@@ -1,12 +1,8 @@
-import LandingPage from './pages/LandingPage';
+import { Outlet } from 'react-router-dom';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <LandingPage />
-    </div>
-  );
+  return <Outlet />;
 }
 
 export default App;

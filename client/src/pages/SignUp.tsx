@@ -1,7 +1,5 @@
 import { Outlet } from 'react-router-dom';
 import Button from '../components/shared/Button/Button';
-import GitHubIcon from '../components/shared/Icons/GitHubIcon';
-import GoogleIcon from '../components/shared/Icons/GoogleIcon';
 import StepDisplay from '../features/signup/StepDisplay';
 import Sso from '../features/sso/Sso';
 
