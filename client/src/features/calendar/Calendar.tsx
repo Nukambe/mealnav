@@ -1,7 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
 import CalendarNav from './CalendarNav';
-import ChevronLeft from '../../components/shared/Icons/ChevronLeft';
 import { Month } from './month';
 
 const today = new Date();
@@ -80,7 +79,7 @@ export default function Calendar({
       </div>
       <button
         type="button"
-        className="mt-8 w-full rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        className="mt-8 w-full rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
       >
         Add meal
       </button>

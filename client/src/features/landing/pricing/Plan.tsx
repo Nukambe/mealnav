@@ -51,7 +51,6 @@ export default function Plan({
       </ul>
       <Button
         href={href}
-        variant={featured ? 'solid' : 'outline'}
         color="white"
         className="mt-8"
         aria-label={`Get started with the ${name} plan for ${price}`}

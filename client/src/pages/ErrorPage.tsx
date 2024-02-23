@@ -20,7 +20,7 @@ export default function ErrorPage() {
       <p className="mt-3 text-sm text-gray-700">
         <i>{error.statusText || error.message}</i>
       </p>
-      <Button className="mt-10" link="/">
+      <Button className="mt-10" to="/">
         Go back home
       </Button>
     </SlimLayout>

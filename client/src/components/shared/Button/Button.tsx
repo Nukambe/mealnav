@@ -1,19 +1,24 @@
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link, LinkProps } from 'react-router-dom';
 
-export default function Button({ ...props }: any) {
-  if (props.href) {
-    return <ExternalLinkButton {...props} />;
-  } else if (props.link) {
-    return <InternalLinkButton {...props} />;
+export default function Button({
+  ...props
+}: React.HTMLProps<HTMLButtonElement | HTMLAnchorElement> | LinkProps) {
+  if ('href' in props && props.href) {
+    return (
+      <ExternalLinkButton {...(props as React.HTMLProps<HTMLAnchorElement>)} />
+    );
+  } else if ('to' in props && props.to) {
+    return <InternalLinkButton {...(props as LinkProps)} />;
   } else {
     return <RegularButton {...props} />;
   }
 }
 
-function ExternalLinkButton({ className, ...props }: any) {
+function ExternalLinkButton({ ...props }: React.HTMLProps<HTMLAnchorElement>) {
   return (
     <a
-      href={props.href}
+      {...props}
       className="flex justify-center items-center py-1 px-2 rounded-full border-black border hover:bg-black hover:text-white transition-colors duration-300 ease-in-out"
     >
       {props.children}
@@ -21,17 +26,15 @@ function ExternalLinkButton({ className, ...props }: any) {
   );
 }
 
-function InternalLinkButton({ className, ...props }: any) {
+function InternalLinkButton({ ...props }: LinkProps) {
   return (
     <Link
-      to={props.link}
+      {...props}
       className="flex justify-center items-center py-1 px-2 rounded-full border-black border hover:bg-black hover:text-white transition-colors duration-300 ease-in-out"
-    >
-      {props.children}
-    </Link>
+    />
   );
 }
 
-function RegularButton({ className, ...props }: any) {
-  return <button className="mt-10">{props.children}</button>;
+function RegularButton({ ...props }: any) {
+  return <button {...props} className="mt-10" />;
 }

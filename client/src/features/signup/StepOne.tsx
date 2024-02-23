@@ -1,7 +1,15 @@
 import Button from '../../components/shared/Button/Button';
 import FormInput from '../../components/shared/Form/FormInput';
 
-export default function StepOne() {
+export default function StepOne({
+  email,
+  setEmail,
+  next,
+}: {
+  email: string;
+  setEmail: (email: string) => void;
+  next: () => void;
+}) {
   return (
     <div>
       <form action="#" method="POST" className="space-y-6">
@@ -9,15 +17,19 @@ export default function StepOne() {
           title="Email Address"
           label="email"
           type="email"
-          autocomplete="email"
+          autoComplete="email"
           required
+          value={email}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setEmail(e.target.value)
+          }
         />
 
         <div>
           <Button
             type="submit"
-            link="/signup/step-two"
             className="flex w-full justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
+            onClick={next}
           >
             Next
           </Button>

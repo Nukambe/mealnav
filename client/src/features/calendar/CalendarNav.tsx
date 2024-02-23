@@ -1,6 +1,7 @@
 import ChevronLeft from '../../components/shared/Icons/ChevronLeft';
+import ChevronRight from '../../components/shared/Icons/ChevronRight';
 
-enum Month {
+export enum Month {
   January,
   February,
   March,
@@ -47,7 +48,7 @@ export default function CalendarNav({
         onClick={prevMonth}
       >
         <span className="sr-only">Previous month</span>
-        {/* <ChevronLeft className="h-5 w-5" aria-hidden="true" /> */} {`<`}
+        <ChevronLeft />
       </button>
       <div className="flex-auto text-sm font-semibold">
         {Month[currentMonth]} {currentYear}
@@ -58,8 +59,7 @@ export default function CalendarNav({
         onClick={nextMonth}
       >
         <span className="sr-only">Next month</span>
-        {/* <ChevronRightIcon className="h-5 w-5" aria-hidden="true" /> */}{' '}
-        {`>`}
+        <ChevronRight />
       </button>
     </div>
   );

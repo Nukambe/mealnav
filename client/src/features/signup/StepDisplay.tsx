@@ -1,36 +1,39 @@
-import { useLocation } from 'react-router-dom';
 import clsx from 'clsx';
 import ChevronLeft from '../../components/shared/Icons/ChevronLeft';
 import { steps } from './steps';
+import Button from '../../components/shared/Button/Button';
 
-export default function StepDisplay({ ...props }) {
-  const location = useLocation();
-  const stepIndex = steps.findIndex((step) => step.path === location.pathname);
-  if (stepIndex === undefined) throw new Error('Step not found');
-
-  const step = steps[stepIndex];
-
+export default function StepDisplay({
+  step,
+  setStep,
+}: {
+  step: number;
+  setStep: (step: number) => void;
+}) {
+  console.log(step);
   return (
     <div>
       <div className="flex py-2 w-full gap-1">
-        {steps?.map((step: any, index: number) => (
-          <StepBar key={index} {...step} active={index <= stepIndex} />
+        {steps?.map((signUpStep: any, index: number) => (
+          <StepBar key={index} {...signUpStep} active={index < step} />
         ))}
       </div>
       <div className="flex">
-        <ChevronLeft />
+        <Button disabled={step === 1} onClick={() => setStep(step - 1)}>
+          <ChevronLeft />
+        </Button>
         <div>
           <p className="text-gray-400 font-bold">
-            Step {stepIndex + 1} of {steps.length}
+            Step {step} of {steps.length}
           </p>
-          <h3>{step.title}</h3>
+          <h3>{steps[step - 1].title}</h3>
         </div>
       </div>
     </div>
   );
 }
 
-function StepBar({ active, ...props }: { active: boolean }) {
+function StepBar({ active }: { active: boolean }) {
   return (
     <div
       className={clsx('h-1 w-full', active ? 'bg-green-500' : 'bg-gray-300')}

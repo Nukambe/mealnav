@@ -1,4 +1,4 @@
-export default function ChevronLeft() {
+export default function ChevronRight() {
   return (
     <svg
       width="50"
@@ -8,7 +8,7 @@ export default function ChevronLeft() {
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        d="M15 18l-6-6 6-6"
+        d="M9 6l6 6-6 6"
         stroke="currentColor"
         strokeWidth="2"
         strokeLinecap="round"

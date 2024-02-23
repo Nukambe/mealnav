@@ -1,6 +1,14 @@
 import FormInput from '../../components/shared/Form/FormInput';
 
-export default function StepFour() {
+export default function StepFour({
+  terms,
+  setTerms,
+  onSubmit,
+}: {
+  terms: boolean;
+  setTerms: (terms: boolean) => void;
+  onSubmit: (e: React.FormEvent) => void;
+}) {
   return (
     <div>
       <form action="#" method="POST" className="space-y-6">
@@ -9,6 +17,10 @@ export default function StepFour() {
           label="terms"
           type="checkbox"
           required
+          checked={terms}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setTerms(e.target.checked)
+          }
         />
 
         <p>
@@ -26,6 +38,7 @@ export default function StepFour() {
           <button
             type="submit"
             className="flex w-full justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
+            onClick={onSubmit}
           >
             Sign Up
           </button>
