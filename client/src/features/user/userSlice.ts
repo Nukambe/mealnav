@@ -31,15 +31,16 @@ const initialState: UserState = {
 export const signup = createAsyncThunk(
   'user/signup',
   async (user: { email: string; password: string; name: string }) => {
-    const response = await fetch('/api/auth/signup', {
+    const response = await fetch('/api/users/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(user),
+      body: JSON.stringify({ ...user }),
     });
 
     const data = await response.json();
+    console.log(data);
     return data;
   },
 );

@@ -17,7 +17,7 @@ import { UsersModule } from './api/users/users.module';
       password: process.env.DB_PASS,
       database: process.env.DB_NAME,
       entities: ['dist/**/*.entity{.ts,.js}'],
-      synchronize: true, // DO NOT USE IN PRODUCTION
+      synchronize: false, // DO NOT USE IN PRODUCTION
     }),
     AuthModule,
     UsersModule,

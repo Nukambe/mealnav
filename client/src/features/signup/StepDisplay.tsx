@@ -10,7 +10,6 @@ export default function StepDisplay({
   step: number;
   setStep: (step: number) => void;
 }) {
-  console.log(step);
   return (
     <div>
       <div className="flex py-2 w-full gap-1">

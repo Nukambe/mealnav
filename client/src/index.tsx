@@ -10,6 +10,9 @@ import './index.css';
 const container = document.getElementById('root')!;
 const root = createRoot(container);
 
+//get csrf token
+fetch('/api/auth/csrf-token');
+
 root.render(
   <React.StrictMode>
     <Provider store={store}>
