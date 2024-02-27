@@ -28,7 +28,6 @@ export class UsersService {
     const user = await this.usersRepository.save(createUserDto);
     const tokens = await this.authService.signTokens(user.id, user.email);
     await this.authService.refreshToken(user.id, tokens.refreshToken);
-    console.log('tokens', tokens);
     return tokens;
   }
 
@@ -36,8 +35,12 @@ export class UsersService {
     return this.usersRepository.find();
   }
 
-  findOne(id: string): Promise<User | null> {
-    return this.usersRepository.findOneBy({ id });
+  async findOne(id: string): Promise<User | null> {
+    const user = await this.usersRepository.findOneBy({ id });
+    if (!user) {
+      return null;
+    }
+    return user;
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {

@@ -1,7 +1,38 @@
+import React from 'react';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { selectStatus, signin, Status } from '../features/user/userSlice';
+import Button from '../components/shared/Button/Button';
 import FormInput from '../components/shared/Form/FormInput';
 import Sso from '../features/sso/Sso';
+import csrfFetch from '../app/fetch';
+import Cookies from 'js-cookie';
+import { redirect } from 'react-router-dom';
+
+export async function loader() {
+  const data = await csrfFetch('/api/auth/refresh', {
+    method: 'POST',
+    headers: {
+      Authorization: `bearer ${Cookies.get('refreshToken')}`,
+    },
+  });
+
+  if (data.accessToken && data.refreshToken) {
+    return redirect('/app');
+  }
+
+  return null;
+}
 
 export default function SignIn() {
+  const dispatch = useAppDispatch();
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch(signin({ username: email, password }));
+  };
+
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
@@ -17,7 +48,7 @@ export default function SignIn() {
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
         <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" onSubmit={handleSubmit}>
             <FormInput
               title="Email Address"
               label="email"
@@ -26,6 +57,8 @@ export default function SignIn() {
               type="email"
               autoComplete="email"
               required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
 
             <FormInput
@@ -36,6 +69,8 @@ export default function SignIn() {
               type="password"
               autoComplete="current-password"
               required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
 
             <div className="flex items-center justify-between">
@@ -65,12 +100,12 @@ export default function SignIn() {
             </div>
 
             <div>
-              <button
+              <Button
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
               >
                 Sign in
-              </button>
+              </Button>
             </div>
           </form>
 

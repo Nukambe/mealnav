@@ -18,7 +18,7 @@ export default function LandingHeader() {
           </div>
           <div className="flex items-center gap-x-5 md:gap-x-8">
             <div className="hidden md:block">
-              <a href="/login">Sign in</a>
+              <Button to="/signin">Sign in</Button>
             </div>
             <Button to="/signup" color="blue">
               <span>

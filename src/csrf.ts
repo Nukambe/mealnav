@@ -8,7 +8,7 @@ export const {
   doubleCsrfProtection, // This is the default CSRF protection middleware.
 } = doubleCsrf({
   getSecret: () => process.env.CSRF_SECRET,
-  cookieName: 'XSRF-TOKEN',
+  cookieName: '__HOST.XSRF-TOKEN',
   cookieOptions: {
     sameSite: process.env.NODE_ENV === 'production' ? 'strict' : 'lax',
     path: '/',
@@ -16,5 +16,5 @@ export const {
   },
   size: 64,
   ignoredMethods: ['GET', 'HEAD', 'OPTIONS'],
-  getTokenFromRequest: (req) => req.headers['XSRF-TOKEN'] as string,
+  getTokenFromRequest: (req) => req.headers['xsrf-token'] as string,
 });
