@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { selectStatus, signin, Status } from '../features/user/userSlice';
 import Button from '../components/shared/Button/Button';
@@ -9,10 +10,13 @@ import Cookies from 'js-cookie';
 import { redirect } from 'react-router-dom';
 
 export async function loader() {
+  const refreshToken = Cookies.get('refreshToken');
+  if (!refreshToken) return null;
+
   const data = await csrfFetch('/api/auth/refresh', {
     method: 'POST',
     headers: {
-      Authorization: `bearer ${Cookies.get('refreshToken')}`,
+      Authorization: `bearer ${refreshToken}`,
     },
   });
 
@@ -25,6 +29,9 @@ export async function loader() {
 
 export default function SignIn() {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const status = useAppSelector(selectStatus);
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
@@ -32,6 +39,10 @@ export default function SignIn() {
     e.preventDefault();
     dispatch(signin({ username: email, password }));
   };
+
+  React.useEffect(() => {
+    if (status === Status.loggedIn) navigate('/app');
+  }, [status, navigate]);
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">

@@ -1,19 +1,93 @@
 import { Injectable } from '@nestjs/common';
 import { CreateMealDto } from './dto/create-meal.dto';
 import { UpdateMealDto } from './dto/update-meal.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Meal } from './entities/meal.entity';
+import {
+  Between,
+  Equal,
+  ILike,
+  In,
+  LessThanOrEqual,
+  MoreThanOrEqual,
+  Repository,
+} from 'typeorm';
+import { SearchMealDto } from './dto/search-meal.dto';
 
 @Injectable()
 export class MealsService {
-  create(createMealDto: CreateMealDto) {
-    return 'This action adds a new meal';
+  constructor(
+    @InjectRepository(Meal)
+    private mealsRepository: Repository<Meal>,
+  ) {}
+
+  async create(createMealDto: CreateMealDto) {
+    const meal = await this.mealsRepository.save(createMealDto);
+    return meal;
   }
 
-  findAll() {
-    return `This action returns all meals`;
+  async findAll(searchMealDto: SearchMealDto) {
+    const [meals, count] = await this.mealsRepository.findAndCount({
+      select: {
+        id: true,
+        name: true,
+        description: true,
+        image: true,
+      },
+      where: {
+        id: this.whereInArray(searchMealDto.ids, 'number'),
+        name: this.whereName(searchMealDto.name),
+        prepTime: this.whereMinMax(
+          searchMealDto.minPrepTime,
+          searchMealDto.maxPrepTime,
+        ),
+        cookTime: this.whereMinMax(
+          searchMealDto.minCookTime,
+          searchMealDto.maxCookTime,
+        ),
+        cookingMethod: this.whereInArray(searchMealDto.cookingMethod, 'string'),
+        recipeCategory: this.whereEqualString(searchMealDto.recipeCategory),
+        recipeCuisine: this.whereInArray(searchMealDto.recipeCuisine, 'string'),
+        suitableForDiet: this.whereInArray(
+          searchMealDto.suitableForDiet,
+          'string',
+        ),
+        // recipeIngredient:
+        aggregateRating: this.whereMinMax(searchMealDto.rating, null),
+        keywords: this.whereInArray(searchMealDto.keywords, 'string'),
+        calories: this.whereMinMax(
+          searchMealDto.minCalories,
+          searchMealDto.maxCalories,
+        ),
+        fat: this.whereMinMax(searchMealDto.minFat, searchMealDto.maxFat),
+        protein: this.whereMinMax(
+          searchMealDto.minProtein,
+          searchMealDto.maxProtein,
+        ),
+        carbs: this.whereMinMax(searchMealDto.minCarbs, searchMealDto.maxCarbs),
+        sugar: this.whereMinMax(searchMealDto.minSugar, searchMealDto.maxSugar),
+        fiber: this.whereMinMax(searchMealDto.minFiber, searchMealDto.maxFiber),
+        cholesterol: this.whereMinMax(
+          searchMealDto.minCholesterol,
+          searchMealDto.maxCholesterol,
+        ),
+        sodium: this.whereMinMax(
+          searchMealDto.minSodium,
+          searchMealDto.maxSodium,
+        ),
+      },
+      take: +searchMealDto.limit || undefined,
+      skip: +searchMealDto.offset || 0,
+      order: {
+        [searchMealDto.sort || 'id']: searchMealDto.order || 'ASC',
+      },
+    });
+    return { meals, count };
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} meal`;
+  async findOne(id: number) {
+    const meal = await this.mealsRepository.findOneBy({ id });
+    return meal;
   }
 
   update(id: number, updateMealDto: UpdateMealDto) {
@@ -22,5 +96,35 @@ export class MealsService {
 
   remove(id: number) {
     return `This action removes a #${id} meal`;
+  }
+
+  private whereInArray(query: string, type: 'string' | 'number') {
+    if (!query) return undefined;
+    const values = query.split(',');
+    if (type === 'number') {
+      return In(values.map((value) => +value));
+    }
+    return In(values);
+  }
+
+  private whereName(name: string) {
+    if (!name) return undefined;
+    return ILike(`%${name}%`);
+  }
+
+  private whereEqualString(query: string) {
+    if (!query) return undefined;
+    return Equal(query);
+  }
+
+  private whereMinMax(min: string, max: string) {
+    if (!min && !max) return undefined;
+    if (min && !max) {
+      return MoreThanOrEqual(+min);
+    }
+    if (!min && max) {
+      return LessThanOrEqual(+max);
+    }
+    return Between(+min, +max);
   }
 }

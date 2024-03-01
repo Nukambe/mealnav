@@ -1,13 +1,25 @@
 import React from 'react';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import {
+  selectMealplan,
+  getMealplan,
+} from '../features/meal-plan/mealplanSlice';
 import Calendar from '../features/calendar/Calendar';
 import Button from '../components/shared/Button/Button';
 import clsx from 'clsx';
 import MealList from '../features/meal-list/MealList';
 
-const meetings: any = [{}, {}];
+const now = new Date();
+const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
 export default function CalendarPage() {
+  const dispatch = useAppDispatch();
+  const mealplan = useAppSelector(selectMealplan);
   const [selectedDate, setSelectedDate] = React.useState<Date | null>(null);
+
+  React.useEffect(() => {
+    dispatch(getMealplan());
+  }, [dispatch]);
 
   return (
     <div className="md:grid md:grid-cols-2 md:divide-x md:divide-gray-200">
@@ -20,7 +32,7 @@ export default function CalendarPage() {
             {selectedDate?.toLocaleDateString() || 'today'}
           </time>
         </h2>
-        <MealList meals={meetings} />
+        <MealList selectedDate={selectedDate || today} />
       </section>
       <Calendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
     </div>

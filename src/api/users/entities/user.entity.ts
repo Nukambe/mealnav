@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Mealplan } from 'src/api/mealplan/entities/mealplan.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity()
 export class User {
@@ -17,6 +18,9 @@ export class User {
   @Column({ nullable: true })
   avatar: string;
 
-  @Column()
+  @Column({ nullable: true })
   refreshToken: string;
+
+  @OneToMany(() => Mealplan, (mealplan) => mealplan.user)
+  mealplans: Mealplan[];
 }

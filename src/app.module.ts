@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './api/auth/auth.module';
 import { UsersModule } from './api/users/users.module';
 import { MealsModule } from './api/meals/meals.module';
+import { MealplanModule } from './api/mealplan/mealplan.module';
 
 @Module({
   imports: [
@@ -18,11 +19,12 @@ import { MealsModule } from './api/meals/meals.module';
       password: process.env.DB_PASS,
       database: process.env.DB_NAME,
       entities: ['dist/**/*.entity{.ts,.js}'],
-      synchronize: false, // DO NOT USE IN PRODUCTION
+      synchronize: true, // DO NOT USE IN PRODUCTION
     }),
     AuthModule,
     UsersModule,
     MealsModule,
+    MealplanModule,
   ],
   controllers: [AppController],
   providers: [AppService],

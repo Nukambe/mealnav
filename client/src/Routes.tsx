@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 
-import App from './App';
+import App, { loader as appLoader } from './App';
 import ErrorPage from './pages/ErrorPage';
 import SignUp from './pages/SignUp';
 import SignIn, { loader as signInLoader } from './pages/SignIn';
@@ -21,13 +21,14 @@ export const routes = createBrowserRouter([
   {
     path: '/signin',
     element: <SignIn />,
-    errorElement: <ErrorPage />,
+    // errorElement: <ErrorPage />,
     loader: signInLoader,
   },
   {
     path: '/app',
     element: <App />,
     errorElement: <ErrorPage />,
+    loader: appLoader,
     children: [{ path: '', element: <CalendarPage /> }],
   },
 ]);

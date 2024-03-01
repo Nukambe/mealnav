@@ -11,7 +11,8 @@ export default async function csrfFetch(url, options = {}) {
   }
 
   const res = await fetch(url, options);
-  if (res.status >= 400) throw res;
+  if (res.status >= 400) console.error('Error', res);
+
   const data = await res.json();
   if (data.csrfToken) Cookies.set('XSRF-TOKEN', data.csrfToken);
   if (data.accessToken) Cookies.set('accessToken', data.accessToken);

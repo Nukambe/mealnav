@@ -1,11 +1,18 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Mealplan } from 'src/api/mealplan/entities/mealplan.entity';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToMany,
+  OneToMany,
+} from 'typeorm';
 
 @Entity()
 export class Meal {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ unique: true })
   name: string; // The name of the item.
 
   @Column()
@@ -15,16 +22,37 @@ export class Meal {
   image: string; // An image of the item.
 
   @Column()
-  prepTime: string; // ISO 8601 duration format.
+  prepTime: number; // Length of time to prepare the recipe, in minutes.
 
   @Column()
-  cookTime: string; // ISO 8601 duration format.
+  cookTime: number; // Length of time to cook the recipe, in minutes.
 
   @Column('text', { array: true })
   cookingMethod: string[]; // The method of cooking, such as Frying, Steaming, ...
 
-  @Column('json')
-  nutrition: nutrition; // Nutrition information about the recipe or menu item.
+  @Column({ nullable: true })
+  calories: number;
+
+  @Column({ nullable: true })
+  fat: number;
+
+  @Column({ nullable: true })
+  protein: number;
+
+  @Column({ nullable: true })
+  carbs: number;
+
+  @Column({ nullable: true })
+  sugar: number;
+
+  @Column({ nullable: true })
+  fiber: number;
+
+  @Column({ nullable: true })
+  cholesterol: number;
+
+  @Column({ nullable: true })
+  sodium: number;
 
   @Column()
   recipeCategory: string; // The category of the recipe—for example, appetizer, entree, etc.
@@ -61,6 +89,9 @@ Not recommended:
 Recommended:
 "keywords": "winter apple pie, nutmeg crust"
     */
+
+  @OneToMany(() => Mealplan, (mealplan) => mealplan.meal)
+  mealPlans: Mealplan[];
 }
 
 export type nutrition = {
