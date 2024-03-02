@@ -36,5 +36,5 @@ function InternalLinkButton({ ...props }: LinkProps) {
 }
 
 function RegularButton({ ...props }: any) {
-  return <button {...props} className="mt-10" />;
+  return <button {...props} className="" />;
 }

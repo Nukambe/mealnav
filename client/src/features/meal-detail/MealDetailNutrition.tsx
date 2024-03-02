@@ -1,7 +1,10 @@
+import React from 'react';
 import Macro from '../../components/shared/Macros/Macro';
-import { Meal, nutrition } from '../meals/mealTypes';
+import { Meal } from '../meals/mealTypes';
 
 export default function MealDetailNutrition({ meal }: { meal: Meal }) {
+  const [showMore, setShowMore] = React.useState(false);
+
   return (
     <section aria-labelledby="applicant-information-title">
       <div className="bg-white shadow sm:rounded-lg">
@@ -12,16 +15,24 @@ export default function MealDetailNutrition({ meal }: { meal: Meal }) {
           >
             Nutrition Information
           </h2>
-          <p className="mt-1 max-w-2xl text-sm text-gray-500">
-            Nutritional Insights at a Glance
-          </p>
         </div>
         <div className="border-t border-gray-200 px-4 py-5 sm:px-6">
-          <dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
-            {Object.entries(meal?.nutrition).map(([macro, value]) => (
-              <Macro key={macro} macro={macro} value={value} />
-            ))}
+          <dl className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-4">
+            {Object.entries(meal?.nutrition).map(([macro, value], index) =>
+              index < 4 ? (
+                <Macro key={macro} macro={macro} value={value} />
+              ) : (
+                showMore && <Macro key={macro} macro={macro} value={value} />
+              ),
+            )}
           </dl>
+          <button
+            type="button"
+            onClick={() => setShowMore(!showMore)}
+            className="text-sm font-medium text-indigo-600 hover:text-indigo-500 mt-4"
+          >
+            {showMore ? 'Show less' : 'Show more'}
+          </button>
         </div>
       </div>
     </section>

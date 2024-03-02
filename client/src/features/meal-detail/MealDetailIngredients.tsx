@@ -1,6 +1,4 @@
 import clsx from 'clsx';
-import AddMealButton from '../../components/shared/Buttons/AddMealButton';
-import InfinityIcon from '../../components/shared/Icons/InfinityIcon';
 import { Meal, ingredient } from '../meals/mealTypes';
 import { UnitPipe } from './unitPipe';
 
@@ -25,9 +23,6 @@ export default function MealDetailIngredients({ meal }: { meal: Meal }) {
             ))}
           </ul>
         </div>
-        <div className="mt-6 flex flex-col justify-stretch">
-          <AddMealButton meal={meal} />
-        </div>
       </div>
     </section>
   );
@@ -40,6 +35,7 @@ function Ingredient({ ingredient }: { ingredient: ingredient }) {
         <div className="w-16 h-16 rounded-full bg-gray-400 flex flex-col items-center justify-center ring-8 ring-white text-white">
           <p
             className={clsx(
+              'font-semibold',
               ingredient.quantity === -1 && 'text-2xl',
               ingredient.quantity !== -1 && 'text-lg',
             )}
@@ -52,7 +48,7 @@ function Ingredient({ ingredient }: { ingredient: ingredient }) {
         </div>
         <div className="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
           <div className="flex items-center">
-            <p className="text-sm text-gray-500">{ingredient.name}</p>
+            <p className="text-lg text-gray-500">{ingredient.name}</p>
           </div>
         </div>
       </div>

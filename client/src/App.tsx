@@ -1,6 +1,7 @@
 import { Outlet, redirect } from 'react-router-dom';
 import csrfFetch from './app/fetch';
 import Cookies from 'js-cookie';
+import Navigation from './features/navigation/Navigation';
 import './App.css';
 
 export async function loader() {
@@ -23,7 +24,13 @@ export async function loader() {
 }
 
 function App() {
-  return <Outlet />;
+  return (
+    <>
+      <Navigation />
+      <div className="h-16 lg:h-32" /> {/* Offset nav height */}
+      <Outlet />
+    </>
+  );
 }
 
 export default App;

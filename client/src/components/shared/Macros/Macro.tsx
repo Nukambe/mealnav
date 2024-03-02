@@ -1,5 +1,4 @@
-import { titleCase } from '../../../app/utility';
-import { Meal } from '../../../features/meals/mealTypes';
+import { getMacroUnit, titleCase } from '../../../app/utility';
 
 export default function Macro({
   macro,
@@ -10,8 +9,11 @@ export default function Macro({
 }) {
   return (
     <div className="sm:col-span-1">
-      <dt className="text-sm font-medium text-gray-500">{titleCase(macro)}</dt>
-      <dd className="mt-1 text-sm text-gray-900">{value}</dd>
+      <dt className="text-lg font-bold text-gray-500">{titleCase(macro)}</dt>
+      <dd className="mt-1 text-xl font-semibold text-gray-900">
+        {value}{' '}
+        <span className="text-base font-normal">{getMacroUnit(macro)}</span>
+      </dd>
     </div>
   );
 }
