@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import ChevronLeft from '../../components/shared/Icons/ChevronLeft';
 import { steps } from './steps';
-import Button from '../../components/shared/Button/Button';
+import Button from '../../components/shared/Buttons/Button';
 
 export default function StepDisplay({
   step,

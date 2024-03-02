@@ -2,10 +2,8 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { store } from './app/store';
-import { RouterProvider, redirect } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
-import { routes } from './Routes';
-import Cookies from 'js-cookie';
+import Routes from './Routes';
 import csrfFetch from './app/fetch';
 import './index.css';
 
@@ -18,7 +16,7 @@ csrfFetch('/api/auth');
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={routes} />
+      <Routes />
     </Provider>
   </React.StrictMode>,
 );

@@ -3,7 +3,8 @@ import clsx from 'clsx';
 import CalendarNav from './CalendarNav';
 import { Month } from './month';
 
-const today = new Date();
+const now = new Date();
+const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
 export default function Calendar({
   selectedDate,
@@ -25,7 +26,7 @@ export default function Calendar({
   }, [currentMonth, currentYear]);
 
   return (
-    <div className="mt-10 text-center lg:col-start-8 lg:col-end-13 lg:row-start-1 lg:mt-9 xl:col-start-9">
+    <div className="mb-10 text-center">
       <CalendarNav
         currentMonth={currentMonth}
         setCurrentMonth={setCurrentMonth}
@@ -79,7 +80,7 @@ export default function Calendar({
       </div>
       <button
         type="button"
-        className="mt-8 w-full rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
+        className="mt-8 mx-auto rounded-md bg-green-600 px-24 py-2 text-sm font-semibold text-white shadow hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
       >
         Add meal
       </button>

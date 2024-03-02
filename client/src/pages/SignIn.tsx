@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { selectStatus, signin, Status } from '../features/user/userSlice';
-import Button from '../components/shared/Button/Button';
+import Button from '../components/shared/Buttons/Button';
 import FormInput from '../components/shared/Form/FormInput';
 import Sso from '../features/sso/Sso';
 import csrfFetch from '../app/fetch';

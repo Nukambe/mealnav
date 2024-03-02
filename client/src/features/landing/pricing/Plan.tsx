@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import CheckIcon from '../../../components/shared/Icons/CheckIcon';
-import Button from '../../../components/shared/Button/Button';
+import Button from '../../../components/shared/Buttons/Button';
 
 export default function Plan({
   name,

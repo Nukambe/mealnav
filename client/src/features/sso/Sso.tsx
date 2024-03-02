@@ -1,4 +1,4 @@
-import Button from '../../components/shared/Button/Button';
+import Button from '../../components/shared/Buttons/Button';
 import GoogleIcon from '../../components/shared/Icons/GoogleIcon';
 import GitHubIcon from '../../components/shared/Icons/GitHubIcon';
 

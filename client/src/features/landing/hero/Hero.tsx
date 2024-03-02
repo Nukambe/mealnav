@@ -1,5 +1,5 @@
 import Container from '../../../components/shared/Container/Container';
-import Button from '../../../components/shared/Button/Button';
+import Button from '../../../components/shared/Buttons/Button';
 
 export default function Hero() {
   return (

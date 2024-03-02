@@ -1,5 +1,5 @@
 import FormInput from '../../components/shared/Form/FormInput';
-import Button from '../../components/shared/Button/Button';
+import Button from '../../components/shared/Buttons/Button';
 
 export default function StepThree({
   name,

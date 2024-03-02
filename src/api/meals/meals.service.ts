@@ -13,6 +13,7 @@ import {
   Repository,
 } from 'typeorm';
 import { SearchMealDto } from './dto/search-meal.dto';
+import { MealDetailDto } from './dto/meal-detail.dto';
 
 @Injectable()
 export class MealsService {
@@ -87,7 +88,8 @@ export class MealsService {
 
   async findOne(id: number) {
     const meal = await this.mealsRepository.findOneBy({ id });
-    return meal;
+    const mealDetail = new MealDetailDto(meal);
+    return mealDetail;
   }
 
   update(id: number, updateMealDto: UpdateMealDto) {

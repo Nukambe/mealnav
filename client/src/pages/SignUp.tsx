@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '../components/shared/Button/Button';
+import Button from '../components/shared/Buttons/Button';
 import StepDisplay from '../features/signup/StepDisplay';
 import Sso from '../features/sso/Sso';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
