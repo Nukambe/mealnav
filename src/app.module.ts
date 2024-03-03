@@ -7,6 +7,7 @@ import { AuthModule } from './api/auth/auth.module';
 import { UsersModule } from './api/users/users.module';
 import { MealsModule } from './api/meals/meals.module';
 import { MealplanModule } from './api/mealplan/mealplan.module';
+import { CategoriesModule } from './api/categories/categories.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { MealplanModule } from './api/mealplan/mealplan.module';
     UsersModule,
     MealsModule,
     MealplanModule,
+    CategoriesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

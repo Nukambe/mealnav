@@ -3,6 +3,7 @@ import counterReducer from '../features/counter/counterSlice';
 import userReducer from '../features/user/userSlice';
 import mealsReducer from '../features/meals/mealsSlice';
 import mealplanReducer from '../features/meal-plan/mealplanSlice';
+import categoryReducer from '../features/categories/categorySlice';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     user: userReducer,
     meals: mealsReducer,
     mealplan: mealplanReducer,
+    category: categoryReducer,
   },
 });
 

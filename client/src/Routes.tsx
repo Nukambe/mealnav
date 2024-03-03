@@ -7,7 +7,8 @@ import SignUp from './pages/SignUp';
 import SignIn, { loader as signInLoader } from './pages/SignIn';
 import LandingPage from './pages/LandingPage';
 import CalendarPage from './pages/CalendarPage';
-import MealPage, { loader as MealLoader } from './pages/MealPage';
+import MealsPage, { loader as mealsLoader } from './pages/MealsPage';
+import MealPage, { loader as mealLoader } from './pages/MealPage';
 
 export default function Routes() {
   const dispatch = useAppDispatch();
@@ -37,9 +38,14 @@ export default function Routes() {
       children: [
         { path: '', element: <CalendarPage /> },
         {
+          path: 'meals',
+          element: <MealsPage />,
+          loader: mealsLoader(dispatch),
+        },
+        {
           path: 'meals/:id',
           element: <MealPage />,
-          loader: MealLoader(dispatch),
+          loader: mealLoader(dispatch),
         },
       ],
     },

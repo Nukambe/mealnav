@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState, store } from '../../app/store';
 import csrfFetch from '../../app/fetch';
 import * as MealTypes from './mealTypes';
-import { act } from 'react-dom/test-utils';
 
 export enum LoadingStatus {
   loading,
