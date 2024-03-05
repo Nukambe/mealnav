@@ -9,6 +9,7 @@ import LandingPage from './pages/LandingPage';
 import CalendarPage from './pages/CalendarPage';
 import MealsPage, { loader as mealsLoader } from './pages/MealsPage';
 import MealPage, { loader as mealLoader } from './pages/MealPage';
+import SearchPage from './pages/SearchPage';
 
 export default function Routes() {
   const dispatch = useAppDispatch();
@@ -46,6 +47,10 @@ export default function Routes() {
           path: 'meals/:id',
           element: <MealPage />,
           loader: mealLoader(dispatch),
+        },
+        {
+          path: 'search',
+          element: <SearchPage />,
         },
       ],
     },

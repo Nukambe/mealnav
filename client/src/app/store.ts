@@ -4,6 +4,7 @@ import userReducer from '../features/user/userSlice';
 import mealsReducer from '../features/meals/mealsSlice';
 import mealplanReducer from '../features/meal-plan/mealplanSlice';
 import categoryReducer from '../features/categories/categorySlice';
+import searchReducer from '../features/search/searchSlice';
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     meals: mealsReducer,
     mealplan: mealplanReducer,
     category: categoryReducer,
+    search: searchReducer,
   },
 });
 
