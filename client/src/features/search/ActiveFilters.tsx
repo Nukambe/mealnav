@@ -1,21 +1,9 @@
-import React from 'react';
 import { useAppSelector } from '../../app/hooks';
-import { selectFilterOptions } from './searchSlice';
-import { initialState as emptySearch } from './searchSlice';
-import { FilterOptions } from './searchTypes';
+import { selectActiveFilters } from './searchSlice';
 import ActiveFilter from './ActiveFilter';
 
 export default function ActiveFilters() {
-  const filters = useAppSelector(selectFilterOptions);
-  const activeFilters = React.useMemo(() => {
-    return Object.entries(filters).filter(([filter, value]) => {
-      const emptyFilter = JSON.stringify(
-        emptySearch.filters[filter as keyof FilterOptions],
-      );
-      const currentFilter = JSON.stringify(value);
-      return emptyFilter !== currentFilter;
-    }, 0);
-  }, [filters]);
+  const activeFilters = useAppSelector(selectActiveFilters);
 
   return (
     <div className="bg-gray-100">
@@ -32,8 +20,8 @@ export default function ActiveFilters() {
 
         <div className="mt-2 sm:ml-4 sm:mt-0">
           <ul className="-m-1 flex flex-wrap items-center">
-            {activeFilters.map(([filter, value]) => (
-              <li className="inline">
+            {activeFilters.map((filter) => (
+              <li key={filter} className="inline">
                 <ActiveFilter key={filter} filter={filter} />
               </li>
             ))}

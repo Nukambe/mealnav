@@ -1,12 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { getAllMeals, LoadingStatus } from '../meals/mealsSlice';
-import { FilterOptions, SortOption, SortOptions } from './searchTypes';
+import { FilterOptions, isMinMax, SortOptions } from './searchTypes';
 import { stat } from 'fs';
 
 export type SearchState = {
   sortOptions: SortOptions;
   filters: FilterOptions;
+  active: string[];
   limit: number;
   page: number;
   status: LoadingStatus;
@@ -25,11 +26,70 @@ export const initialState: SearchState = {
   filters: {
     prepTime: { min: 0, max: 0 },
     cookTime: { min: 0, max: 0 },
-    cookingMethod: [],
-    recipeCategory: [],
-    recipeCuisine: [],
-    suitableForDiet: [],
-    recipeIngredient: [],
+    cookingMethod: {
+      options: [
+        'Steaming',
+        'Roasting',
+        'Boiling',
+        'Frying',
+        'Poaching',
+        'Simmering',
+        'Braising',
+        'Broiling',
+        'Baking',
+        'Sauteing',
+        'Grilling',
+        'Stir-frying',
+        'Microwaving',
+        'Pressure cooking',
+        'Slow cooking',
+        'Smoking',
+        'Searing',
+      ],
+      selected: [],
+    },
+    recipeCategory: {
+      options: [
+        'Breakfast',
+        'Lunch',
+        'Dinner',
+        'Snack',
+        'Appetizer',
+        'Dessert',
+        'Side',
+        'Main Course',
+        'Drink',
+      ],
+      selected: [],
+    },
+    recipeCuisine: {
+      options: [
+        'African',
+        'American',
+        'British',
+        'Cajun',
+        'Caribbean',
+        'Chinese',
+        'Eastern European',
+        'European',
+        'French',
+        'German',
+      ],
+      selected: [],
+    },
+    suitableForDiet: {
+      options: [
+        'Diabetic',
+        'Halal',
+        'Vegan',
+        'Vegetarian',
+        'Pescaetarian',
+        'Kosher',
+        'Keto',
+      ],
+      selected: [],
+    },
+    recipeIngredient: { options: [], selected: [] },
     calories: { min: 0, max: 0 },
     fat: { min: 0, max: 0 },
     protein: { min: 0, max: 0 },
@@ -41,6 +101,7 @@ export const initialState: SearchState = {
   },
   limit: 10,
   page: 1,
+  active: [],
   status: LoadingStatus.loading,
 };
 
@@ -66,11 +127,49 @@ export const searchSlice = createSlice({
         state.sortOptions[action.payload.sort].current = true;
       }
     },
-    setFilterOption: (
+    setActiveFilter: (
       state,
       action: PayloadAction<{ filter: keyof FilterOptions; checked: boolean }>,
     ) => {
-      // state.filters[action.payload.filter] = action.payload.checked;
+      if (action.payload.checked) {
+        state.active.push(action.payload.filter);
+      } else {
+        state.active = state.active.filter(
+          (filter) => filter !== action.payload.filter,
+        );
+      }
+    },
+    setFilterMinMax: (
+      state: any,
+      action: PayloadAction<{
+        filter: keyof FilterOptions;
+        minMax: 'min' | 'max';
+        value: number;
+      }>,
+    ) => {
+      state.filters[action.payload.filter][action.payload.minMax] =
+        action.payload.value;
+    },
+    setFilterOption: (
+      state: any,
+      action: PayloadAction<{
+        filter: keyof FilterOptions;
+        option: string;
+      }>,
+    ) => {
+      if (
+        state.filters[action.payload.filter].selected.includes(
+          action.payload.option,
+        )
+      ) {
+        state.filters[action.payload.filter].selected = state.filters[
+          action.payload.filter
+        ].selected.filter((option: string) => option !== action.payload.option);
+      } else {
+        state.filters[action.payload.filter].selected.push(
+          action.payload.option,
+        );
+      }
     },
     setLimit: (state, action: PayloadAction<number>) => {
       state.limit = action.payload;
@@ -95,14 +194,21 @@ export const searchSlice = createSlice({
   },
 });
 
-export const { setSortOption, setFilterOption, setLimit, setPage } =
-  searchSlice.actions;
+export const {
+  setSortOption,
+  setActiveFilter,
+  setFilterMinMax,
+  setFilterOption,
+  setLimit,
+  setPage,
+} = searchSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
 export const selectSortOptions = (state: RootState) => state.search.sortOptions;
 export const selectFilterOptions = (state: RootState) => state.search.filters;
+export const selectActiveFilters = (state: RootState) => state.search.active;
 export const selectLimit = (state: RootState) => state.search.limit;
 export const selectPage = (state: RootState) => state.search.page;
 export const selectSearchStatus = (state: RootState) => state.search.status;

@@ -1,4 +1,18 @@
+import { useAppDispatch } from '../../app/hooks';
+import { setActiveFilter } from './searchSlice';
+import { FilterOptions } from './searchTypes';
+
 export default function ActiveFilter({ filter }: { filter: string }) {
+  const dispatch = useAppDispatch();
+  const removeFilter = () => {
+    dispatch(
+      setActiveFilter({
+        filter: filter as keyof FilterOptions,
+        checked: false,
+      }),
+    );
+  };
+
   return (
     <span
       key={filter}
@@ -8,6 +22,7 @@ export default function ActiveFilter({ filter }: { filter: string }) {
       <button
         type="button"
         className="ml-1 inline-flex h-4 w-4 flex-shrink-0 rounded-full p-1 text-gray-400 hover:bg-gray-200 hover:text-gray-500"
+        onClick={removeFilter}
       >
         <span className="sr-only">Remove filter for {filter}</span>
         <svg

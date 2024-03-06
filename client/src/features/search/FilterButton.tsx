@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppSelector } from '../../app/hooks';
-import { selectFilterOptions } from './searchSlice';
+import { selectActiveFilters, selectFilterOptions } from './searchSlice';
 import { FilterOptions } from './searchTypes';
 import { initialState as emptySearch } from './searchSlice';
 import FilterInput from './FilterInput';
@@ -8,17 +8,7 @@ import FilterInput from './FilterInput';
 export default function FilterButton() {
   const filters = useAppSelector(selectFilterOptions);
   const [open, setOpen] = React.useState(false);
-  const totalFilters = React.useMemo(
-    () =>
-      Object.entries(filters).reduce((acc, [filter, value]) => {
-        const emptyFilter = JSON.stringify(
-          emptySearch.filters[filter as keyof FilterOptions],
-        );
-        const currentFilter = JSON.stringify(value);
-        return emptyFilter !== currentFilter ? acc + 1 : acc;
-      }, 0),
-    [filters],
-  );
+  const activeFilters = useAppSelector(selectActiveFilters);
 
   return (
     <>
@@ -39,9 +29,9 @@ export default function FilterButton() {
                 onClick={() => setOpen(!open)}
               >
                 <span>Filters</span>
-                {totalFilters > 0 ? (
+                {activeFilters.length > 0 ? (
                   <span className="ml-1.5 rounded bg-gray-200 px-1.5 py-0.5 text-xs font-semibold tabular-nums text-gray-700">
-                    {totalFilters}
+                    {activeFilters.length}
                   </span>
                 ) : null}
                 {/* <ChevronDownIcon

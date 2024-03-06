@@ -16,11 +16,11 @@ export type SortOptions = {
 export type FilterOptions = {
   prepTime: { min: number; max: number };
   cookTime: { min: number; max: number };
-  cookingMethod: string[];
-  recipeCategory: string[];
-  recipeCuisine: string[];
-  suitableForDiet: string[];
-  recipeIngredient: string[];
+  cookingMethod: { options: string[]; selected: string[] };
+  recipeCategory: { options: string[]; selected: string[] };
+  recipeCuisine: { options: string[]; selected: string[] };
+  suitableForDiet: { options: string[]; selected: string[] };
+  recipeIngredient: { options: string[]; selected: string[] };
   calories: { min: number; max: number };
   fat: { min: number; max: number };
   protein: { min: number; max: number };
@@ -30,3 +30,14 @@ export type FilterOptions = {
   cholesterol: { min: number; max: number };
   sodium: { min: number; max: number };
 };
+
+export interface MinMax {
+  min: number;
+  max: number;
+}
+
+export function isMinMax(
+  value: MinMax | { options: string[]; selected: string[] },
+): value is MinMax {
+  return (value as MinMax).min !== undefined;
+}
