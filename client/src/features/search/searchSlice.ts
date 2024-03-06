@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { getAllMeals, LoadingStatus } from '../meals/mealsSlice';
-import { FilterOptions, isMinMax, SortOptions } from './searchTypes';
-import { stat } from 'fs';
+import { FilterOptions, SortOptions } from './searchTypes';
+import { act } from 'react-dom/test-utils';
 
 export type SearchState = {
   sortOptions: SortOptions;
@@ -132,8 +132,10 @@ export const searchSlice = createSlice({
       action: PayloadAction<{ filter: keyof FilterOptions; checked: boolean }>,
     ) => {
       if (action.payload.checked) {
+        // If the filter is checked, add it to the active list
         state.active.push(action.payload.filter);
       } else {
+        // If the filter is unchecked, remove it from the active list
         state.active = state.active.filter(
           (filter) => filter !== action.payload.filter,
         );
@@ -147,8 +149,26 @@ export const searchSlice = createSlice({
         value: number;
       }>,
     ) => {
+      if (
+        // If the value is not 0, add the filter to the active list
+        action.payload.value > 0
+      ) {
+        // If the filter is not already in the active list, add it
+        if (!state.active.includes(action.payload.filter))
+          state.active.push(action.payload.filter);
+      }
       state.filters[action.payload.filter][action.payload.minMax] =
         action.payload.value;
+      if (
+        // If the min and max values are 0, remove the filter from the active list
+        state.filters[action.payload.filter].min === 0 &&
+        state.filters[action.payload.filter].max === 0
+      ) {
+        // If the filter is in the active list, remove it
+        state.active = state.active.filter(
+          (filter: string) => filter !== action.payload.filter,
+        );
+      }
     },
     setFilterOption: (
       state: any,
@@ -158,17 +178,34 @@ export const searchSlice = createSlice({
       }>,
     ) => {
       if (
+        // Check if the option is already selected
         state.filters[action.payload.filter].selected.includes(
           action.payload.option,
         )
       ) {
+        // If the option is already selected, remove it
         state.filters[action.payload.filter].selected = state.filters[
           action.payload.filter
         ].selected.filter((option: string) => option !== action.payload.option);
       } else {
+        // If the option is not selected, add it
         state.filters[action.payload.filter].selected.push(
           action.payload.option,
         );
+      }
+      if (
+        // If there are no selected options, remove the filter from the active list
+        state.filters[action.payload.filter].selected.length === 0
+      ) {
+        // If the filter is in the active list, remove it
+        state.active = state.active.filter(
+          (filter: string) => filter !== action.payload.filter,
+        );
+      } else if (
+        // If the filter is not in the active list, add it
+        !state.active.includes(action.payload.filter)
+      ) {
+        state.active.push(action.payload.filter);
       }
     },
     setLimit: (state, action: PayloadAction<number>) => {

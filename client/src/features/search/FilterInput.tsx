@@ -2,7 +2,6 @@ import clsx from 'clsx';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import {
   selectActiveFilters,
-  selectFilterOptions,
   setActiveFilter,
   setFilterMinMax,
   setFilterOption,

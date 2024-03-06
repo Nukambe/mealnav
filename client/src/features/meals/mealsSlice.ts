@@ -64,7 +64,7 @@ export const mealsSlice = createSlice({
       .addCase(
         getAllMeals.fulfilled,
         (state, action: PayloadAction<MealsState>) => {
-          state.meals.push(...action.payload.meals);
+          state.meals = action.payload.meals;
           state.status = LoadingStatus.success;
         },
       )

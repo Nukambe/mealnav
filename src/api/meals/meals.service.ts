@@ -4,12 +4,14 @@ import { UpdateMealDto } from './dto/update-meal.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Meal } from './entities/meal.entity';
 import {
+  ArrayContains,
   Between,
   Equal,
   ILike,
   In,
   LessThanOrEqual,
   MoreThanOrEqual,
+  Or,
   Repository,
 } from 'typeorm';
 import { SearchMealDto } from './dto/search-meal.dto';
@@ -46,6 +48,7 @@ export class MealsService {
           searchMealDto.minCookTime,
           searchMealDto.maxCookTime,
         ),
+        // cookingMethod: this.whereInArray(searchMealDto.cookingMethod, 'string'),
         cookingMethod: this.whereInArray(searchMealDto.cookingMethod, 'string'),
         recipeCategory: this.whereEqualString(searchMealDto.recipeCategory),
         recipeCuisine: this.whereInArray(searchMealDto.recipeCuisine, 'string'),
@@ -103,10 +106,11 @@ export class MealsService {
   private whereInArray(query: string, type: 'string' | 'number') {
     if (!query) return undefined;
     const values = query.split(',');
+    console.log(values);
     if (type === 'number') {
       return In(values.map((value) => +value));
     }
-    return In(values);
+    return Or(...values.map((value) => ArrayContains([value])));
   }
 
   private whereName(name: string) {
@@ -120,11 +124,14 @@ export class MealsService {
   }
 
   private whereMinMax(min: string, max: string) {
+    console.log('min', min);
+    console.log('max', max);
     if (!min && !max) return undefined;
     if (min && !max) {
       return MoreThanOrEqual(+min);
     }
     if (!min && max) {
+      console.log('max', max);
       return LessThanOrEqual(+max);
     }
     return Between(+min, +max);
