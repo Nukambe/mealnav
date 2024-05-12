@@ -23,7 +23,7 @@ export default function CallToAction() {
             It's time to revolutionize your meal planning and embrace a
             healthier, more organized lifestyle.
           </p>
-          <Button href="/register" color="white" className="mt-10">
+          <Button href="/signup" color="white" className="mt-8">
             Get 2 months free
           </Button>
         </div>

@@ -12,12 +12,12 @@ export default function Testimonials() {
       <Container>
         <div className="mx-auto max-w-2xl md:text-center">
           <h2 className="font-display text-3xl tracking-tight text-slate-900 sm:text-4xl">
-            Loved by businesses worldwide.
+            Loved by Home Cooks Everywhere.
           </h2>
           <p className="mt-4 text-lg tracking-tight text-slate-700">
-            Our software is so simple that people can’t help but fall in love
-            with it. Simplicity is easy when you just skip tons of
-            mission-critical features.
+            Our meal planning app makes meal prep so effortless, our users can’t
+            help but fall in love with it. Discover the joy of cooking with our
+            simple, intuitive design.
           </p>
         </div>
         <ul className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-6 sm:gap-8 lg:mt-20 lg:max-w-none lg:grid-cols-3">
@@ -41,15 +41,6 @@ export default function Testimonials() {
                           <div className="mt-1 text-sm text-slate-500">
                             {testimonial.author.role}
                           </div>
-                        </div>
-                        <div className="overflow-hidden rounded-full bg-slate-50">
-                          <img
-                            className="h-14 w-14 object-cover"
-                            src={testimonial.author.image}
-                            alt=""
-                            width={56}
-                            height={56}
-                          />
                         </div>
                       </figcaption>
                     </figure>

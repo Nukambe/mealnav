@@ -7,9 +7,9 @@ export default function LandingHeader() {
       <Container>
         <nav className="relative z-50 flex justify-between">
           <div className="flex items-center md:gap-x-12">
-            <Button to="/" aria-label="Home">
-              {/* <Logo className="h-10 w-auto" /> */}
-            </Button>
+            {/* <Button to="/" aria-label="Home">
+              <Logo className="h-10 w-auto" />
+            </Button> */}
             <div className="hidden md:flex md:gap-x-6">
               <a href="#features">Features</a>
               <a href="#testimonials">Testimonials</a>

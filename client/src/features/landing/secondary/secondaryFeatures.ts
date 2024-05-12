@@ -12,7 +12,7 @@ export const features: Feature[] = [
     subtitle:
       'Gain insights into your eating habits with comprehensive meal tracking.',
     description:
-      'Our discussion on features already highlights the importance of understanding your dietary patterns. Reiterating it here underscores its value in achieving your nutrition goals.',
+      'Our discussion on dietary patterns is important as it helps in understanding how to effectively achieve your nutrition goals.',
     image: 'meal-insights.png',
     icon: 'meal-insights-icon.png',
   },

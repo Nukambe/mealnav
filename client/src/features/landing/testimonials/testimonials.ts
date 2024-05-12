@@ -2,39 +2,19 @@ export const testimonials = [
   [
     {
       content:
-        'TaxPal is so easy to use I can’t help but wonder if it’s really doing the things the government expects me to do.',
+        "Since I started using the meal planning app, I've noticed a huge change in my energy levels and overall health. The personalized meal plans are easy to follow, and I love the variety of recipes provided. It's like having a nutritionist in my pocket!",
       author: {
-        name: 'Sheryl Berge',
-        role: 'CEO at Lynch LLC',
+        name: 'Emily, 34',
+        role: '',
         image: '',
       },
     },
     {
       content:
-        'I’m trying to get a hold of someone in support, I’m in a lot of trouble right now and they are saying it has something to do with my books. Please get back to me right away.',
+        "This app has been a game-changer for my busy lifestyle. I can plan meals for the week in just a few minutes, and the grocery list feature saves so much time. It's helped me eat healthier without the stress.",
       author: {
-        name: 'Amy Hahn',
-        role: 'Director at Velocity Industries',
-        image: '',
-      },
-    },
-  ],
-  [
-    {
-      content:
-        'The best part about TaxPal is every time I pay my employees, my bank balance doesn’t go down like it used to. Looking forward to spending this extra cash when I figure out why my card is being declined.',
-      author: {
-        name: 'Leland Kiehn',
-        role: 'Founder of Kiehn and Sons',
-        image: '',
-      },
-    },
-    {
-      content:
-        'There are so many things I had to do with my old software that I just don’t do at all with TaxPal. Suspicious but I can’t say I don’t love it.',
-      author: {
-        name: 'Erin Powlowski',
-        role: 'COO at Armstrong Inc',
+        name: 'Mark, 45',
+        role: '',
         image: '',
       },
     },
@@ -42,19 +22,39 @@ export const testimonials = [
   [
     {
       content:
-        'I used to have to remit tax to the EU and with TaxPal I somehow don’t have to do that anymore. Nervous to travel there now though.',
+        'I was always intimidated by meal planning, but this app makes it so simple and fun. The interactive features and community support have made me look forward to cooking again. Highly recommend!',
       author: {
-        name: 'Peter Renolds',
-        role: 'Founder of West Inc',
+        name: 'Sarah, 29',
+        role: '',
         image: '',
       },
     },
     {
       content:
-        'This is the fourth email I’ve sent to your support team. I am literally being held in jail for tax fraud. Please answer your damn emails, this is important.',
+        "As someone with specific dietary needs, I've struggled to find recipes that work for me. This app has customizable options that have made it easy to stick to my dietary restrictions. I feel supported and understood.",
       author: {
-        name: 'Amy Hahn',
-        role: 'Director at Velocity Industries',
+        name: 'Alex, 38',
+        role: '',
+        image: '',
+      },
+    },
+  ],
+  [
+    {
+      content:
+        "I've tried many meal planning apps, and this one stands out because of its accuracy and ease of use. The nutrition tracking helps me keep on top of my health goals. I've already recommended it to all my friends!",
+      author: {
+        name: 'Jenna, 27',
+        role: '',
+        image: '',
+      },
+    },
+    {
+      content:
+        'What I love about this app is how it adapts to my preferences over time. The AI suggestions for meals each week are spot on, and cooking has become less of a chore and more of a joy.',
+      author: {
+        name: 'Carlos, 41',
+        role: '',
         image: '',
       },
     },

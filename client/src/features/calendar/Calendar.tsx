@@ -78,12 +78,6 @@ export default function Calendar({
           </button>
         ))}
       </div>
-      <button
-        type="button"
-        className="mt-8 mx-auto rounded-md bg-green-600 px-24 py-2 text-sm font-semibold text-white shadow hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
-      >
-        Add meal
-      </button>
     </div>
   );
 }

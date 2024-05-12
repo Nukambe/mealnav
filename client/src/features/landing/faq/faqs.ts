@@ -1,53 +1,54 @@
 export const faqs = [
   [
     {
-      question: 'Does TaxPal handle VAT?',
+      question: 'Does the meal planner app handle dietary restrictions?',
       answer:
-        'Well no, but if you move your company offshore you can probably ignore it.',
+        'Yes, our app allows you to customize meal plans based on various dietary restrictions, including vegetarian, vegan, gluten-free, and keto diets.',
     },
     {
       question: 'Can I pay for my subscription via purchase order?',
-      answer: 'Absolutely, we are happy to take your money in all forms.',
+      answer:
+        'Yes, we accept payment through purchase orders as well as other common payment methods.',
     },
     {
-      question: 'How do I apply for a job at TaxPal?',
+      question: 'How do I apply for a job at the meal planner app company?',
       answer:
-        'We only hire our customers, so subscribe for a minimum of 6 months and then let’s talk.',
+        "Please visit our careers page to view open positions and submit your application online. We're always looking for talented individuals to join our team!",
     },
   ],
   [
     {
-      question: 'What was that testimonial about tax fraud all about?',
+      question: 'What if I have allergies or food intolerances?',
       answer:
-        'TaxPal is just a software application, ultimately your books are your responsibility.',
+        'Our app allows you to exclude specific ingredients to accommodate allergies and food intolerances, ensuring your meal plans are safe and enjoyable.',
     },
     {
-      question:
-        'TaxPal sounds horrible but why do I still feel compelled to purchase?',
+      question: 'Why choose this meal planner app over others?',
       answer:
-        'This is the power of excellent visual design. You just can’t resist it, no matter how poorly it actually functions.',
+        'Our meal planner app is designed with user-friendly interfaces and provides unique features like smart grocery lists, nutritional tracking, and customizable meal suggestions that adapt to your preferences and goals.',
     },
     {
-      question:
-        'I found other companies called TaxPal, are you sure you can use this name?',
+      question: 'Is the meal planner app name trademarked?',
       answer:
-        'Honestly not sure at all. We haven’t actually incorporated or anything, we just thought it sounded cool and made this website.',
+        'Yes, our app name is officially registered and trademarked to ensure brand identity and legal protection.',
     },
   ],
   [
     {
-      question: 'How do you generate reports?',
+      question:
+        'How do you ensure the nutritional accuracy of your meal plans?',
       answer:
-        'You just tell us what data you need a report for, and we get our kids to create beautiful charts for you using only the finest crayons.',
+        'We work with certified nutritionists to design our meal plans and continuously update our database with the latest nutritional information.',
     },
     {
-      question: 'Can we expect more inventory features?',
-      answer: 'In life it’s really better to never expect anything at all.',
+      question: 'Can I expect new features in the future?',
+      answer:
+        "Absolutely! We're constantly working on new features and improvements based on user feedback and the latest trends in nutritional science.",
     },
     {
-      question: 'I lost my password, how do I get into my account?',
+      question: 'I forgot my password, how can I reset it?',
       answer:
-        'Send us an email and we will send you a copy of our latest password spreadsheet so you can find your information.',
+        'You can reset your password by clicking on the "Forgot Password" link on the login page. Instructions for resetting your password will be sent to your registered email address.',
     },
   ],
 ];

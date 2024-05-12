@@ -124,8 +124,6 @@ export class MealsService {
   }
 
   private whereMinMax(min: string, max: string) {
-    console.log('min', min);
-    console.log('max', max);
     if (!min && !max) return undefined;
     if (min && !max) {
       return MoreThanOrEqual(+min);

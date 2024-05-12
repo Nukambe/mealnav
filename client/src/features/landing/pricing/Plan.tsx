@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import CheckIcon from '../../../components/shared/Icons/CheckIcon';
 import Button from '../../../components/shared/Buttons/Button';
+import { Link } from 'react-router-dom';
 
 export default function Plan({
   name,
@@ -49,14 +50,14 @@ export default function Plan({
           </li>
         ))}
       </ul>
-      <Button
-        href={href}
+      <Link
+        to={href}
         color="white"
-        className="mt-8"
+        className="text-white mt-8 bg-green-500 rounded px-8 py-2 hover:bg-green-400"
         aria-label={`Get started with the ${name} plan for ${price}`}
       >
         Get started
-      </Button>
+      </Link>
     </section>
   );
 }

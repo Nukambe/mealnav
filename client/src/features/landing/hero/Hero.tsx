@@ -25,8 +25,13 @@ export default function Hero() {
         never run out of delicious ideas.
       </p>
       <div className="mt-10 flex justify-center gap-x-6">
-        <Button href="/register">Get 2 months free</Button>
-        <Button href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+        {/* <Button href="/register">Get 2 months free</Button> */}
+        <a
+          href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+          target="_blank"
+          rel="noreferrer"
+          className="flex items-center text-green-600 group-active:text-green-700 bg-green-100 group-active:bg-green-200 px-4 py-2 rounded-md transition-colors duration-200 ease-in-out hover:bg-green-200 hover:text-green-700"
+        >
           <svg
             aria-hidden="true"
             className="h-3 w-3 flex-none fill-green-600 group-active:fill-current"
@@ -34,7 +39,7 @@ export default function Hero() {
             <path d="m9.997 6.91-7.583 3.447A1 1 0 0 1 1 9.447V2.553a1 1 0 0 1 1.414-.91L9.997 5.09c.782.355.782 1.465 0 1.82Z" />
           </svg>
           <span className="ml-3">Watch video</span>
-        </Button>
+        </a>
       </div>
       <div className="mt-36 lg:mt-44">
         <p className="font-display text-base text-slate-900">

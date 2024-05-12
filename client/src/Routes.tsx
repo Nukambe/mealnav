@@ -40,7 +40,8 @@ export default function Routes() {
         { path: '', element: <CalendarPage /> },
         {
           path: 'meals',
-          element: <MealsPage />,
+          // element: <MealsPage />,
+          element: <SearchPage />,
           loader: mealsLoader(dispatch),
         },
         {
