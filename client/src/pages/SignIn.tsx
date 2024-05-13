@@ -84,7 +84,7 @@ export default function SignIn() {
               onChange={(e) => setPassword(e.target.value)}
             />
 
-            <div className="flex items-center justify-between">
+            {/* <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <input
                   id="remember-me"
@@ -108,7 +108,7 @@ export default function SignIn() {
                   Forgot password?
                 </a>
               </div>
-            </div>
+            </div> */}
 
             <div>
               <Button
@@ -120,7 +120,7 @@ export default function SignIn() {
             </div>
           </form>
 
-          <Sso />
+          {/* <Sso /> */}
         </div>
 
         <p className="mt-10 text-center text-sm text-gray-500">

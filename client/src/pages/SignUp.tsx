@@ -37,11 +37,6 @@ export default function SignUp() {
       <div className="flex flex-1 flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
         <div className="mx-auto w-full max-w-sm lg:w-96">
           <div>
-            <img
-              className="h-10 w-auto"
-              src="https://tailwindui.com/img/logos/mark.svg?color=green&shade=600"
-              alt="Your Company"
-            />
             <h2 className="mt-8 text-2xl font-bold leading-9 tracking-tight text-gray-900">
               Sign up to start planning
             </h2>
@@ -54,21 +49,25 @@ export default function SignUp() {
               <StepOne
                 email={email}
                 setEmail={setEmail}
-                next={() => setStep(2)}
+                next={() =>
+                  email ? setStep(2) : setError('Email is required')
+                }
               />
             )}
             {step === 2 && (
               <StepTwo
                 password={password}
                 setPassword={setPassword}
-                next={() => setStep(3)}
+                next={() =>
+                  password ? setStep(3) : setError('Password is required')
+                }
               />
             )}
             {step === 3 && (
               <StepThree
                 name={name}
                 setName={setName}
-                next={() => setStep(4)}
+                next={() => (name ? setStep(4) : setError('Name is required'))}
               />
             )}
             {step === 4 && (
@@ -80,7 +79,7 @@ export default function SignUp() {
             )}
 
             <div className="mt-10">
-              <Sso />
+              {/* <Sso /> */}
               <p className="text-sm text-center leading-6 text-gray-500 mt-8">
                 Already a member?{' '}
                 <Button
