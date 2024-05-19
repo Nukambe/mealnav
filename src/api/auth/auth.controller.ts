@@ -6,7 +6,6 @@ import {
   Get,
   Request,
   Response,
-  Delete,
   UseGuards,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
@@ -38,7 +37,7 @@ export class AuthController {
 
   @HttpCode(HttpStatus.OK)
   @UseGuards(AuthGuard('jwt'))
-  @Delete()
+  @Post('signout')
   signOut(@Request() req: any, @Response() res: any) {
     return this.authService.signOut(req, res);
   }

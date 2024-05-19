@@ -30,12 +30,10 @@ export class AuthService {
 
   async signOut(req: Request, res: Response) {
     const { sub } = req.user as JwtPayload;
-    console.log('signout user', req.user);
     const user = await this.usersService.findOne(sub);
     if (!user) {
       throw new UnauthorizedException('User not found');
     }
-    console.log('user', user);
     if (!user.refreshToken) {
       throw new UnauthorizedException('User not signed in');
     }
