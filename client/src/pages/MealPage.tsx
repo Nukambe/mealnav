@@ -26,7 +26,7 @@ export default function MealPage() {
   return (
     <div className="min-h-full">
       <main className="py-10">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 md:flex md:items-center md:justify-between md:space-x-5 lg:max-w-7xl lg:px-8">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:flex lg:items-center lg:justify-between lg:space-x-5 lg:max-w-7xl lg:px-8">
           <MealDetailHeader meal={meal} />
           <div className="mt-6 flex flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-3 sm:space-y-0 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3">
             {/* <FavoriteButton meal={meal} /> */}
@@ -37,9 +37,19 @@ export default function MealPage() {
         <div className="mx-auto mt-8 grid max-w-3xl grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
           <div className="space-y-6 lg:col-span-2 lg:col-start-1">
             <MealDetailNutrition meal={meal} />
+            <div className="hidden lg:block">
+              <MealDetailInstructions meal={meal} />
+            </div>
+            <div className="block lg:hidden">
+              <MealDetailIngredients meal={meal} />
+            </div>
+          </div>
+          <div className="hidden lg:block">
+            <MealDetailIngredients meal={meal} />
+          </div>
+          <div className="block lg:hidden">
             <MealDetailInstructions meal={meal} />
           </div>
-          <MealDetailIngredients meal={meal} />
         </div>
       </main>
     </div>

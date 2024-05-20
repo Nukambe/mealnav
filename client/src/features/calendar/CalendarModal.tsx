@@ -52,7 +52,7 @@ export default function CalendarModal({ meal }: { meal: MealDto }) {
   };
 
   return (
-    <div className="relative" style={{ width: 300 }}>
+    <div className="relative m-auto" style={{ width: 300 }}>
       <Calendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
       <div className="flex justify-center border w-fit mx-auto rounded my-8">
         <button

@@ -2,11 +2,11 @@ import { MealDto } from '../meals/mealTypes';
 
 export default function MealDetailHeader({ meal }: { meal: MealDto }) {
   return (
-    <div className="flex items-center space-x-5">
+    <div className="flex items-center space-x-5 flex-col lg:flex-row">
       <div className="flex-shrink-0">
         <div className="relative">
           <img
-            className="h-16 w-16 rounded-full"
+            className="h-64 w-64 rounded-full"
             src={meal.image}
             alt={meal.name}
           />

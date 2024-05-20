@@ -42,7 +42,7 @@ export default function MealDetailNutrition({ meal }: { meal: Meal }) {
           <button
             type="button"
             onClick={() => setShowMore(!showMore)}
-            className="text-sm font-medium text-indigo-600 hover:text-indigo-500 mt-4"
+            className="text-sm font-medium text-green-600 hover:text-green-500 mt-4"
           >
             {showMore ? 'Show less' : 'Show more'}
           </button>
