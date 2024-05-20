@@ -24,9 +24,21 @@ const initialState: MealsState = {
 export const getAllMeals = createAsyncThunk(
   'meals/getAllMeals',
   async (query: MealTypes.SearchMealDto) => {
+    query.fullDetails = '0';
     const meals = await csrfFetch(
       `/api/meals?${new URLSearchParams(query).toString()}`,
     );
+    return meals;
+  },
+);
+
+export const getFullMeals = createAsyncThunk(
+  'meals/getFullMeals',
+  async (ids: number[]) => {
+    const meals = await csrfFetch(
+      `/api/meals?${new URLSearchParams({ ids: ids.join(','), fullDetails: '1' })}`,
+    );
+    console.log(meals);
     return meals;
   },
 );
@@ -61,13 +73,10 @@ export const mealsSlice = createSlice({
       .addCase(getAllMeals.pending, (state) => {
         state.status = LoadingStatus.loading;
       })
-      .addCase(
-        getAllMeals.fulfilled,
-        (state, action: PayloadAction<MealsState>) => {
-          state.meals = action.payload.meals;
-          state.status = LoadingStatus.success;
-        },
-      )
+      .addCase(getAllMeals.fulfilled, (state, action: PayloadAction<any>) => {
+        state.meals = action.payload.meals;
+        state.status = LoadingStatus.success;
+      })
       .addCase(getAllMeals.rejected, (state) => {
         state.status = LoadingStatus.failed;
       })
@@ -85,6 +94,16 @@ export const mealsSlice = createSlice({
         },
       )
       .addCase(getMealById.rejected, (state) => {
+        state.status = LoadingStatus.failed;
+      })
+      .addCase(getFullMeals.pending, (state) => {
+        state.status = LoadingStatus.loading;
+      })
+      .addCase(getFullMeals.fulfilled, (state, action: PayloadAction<any>) => {
+        state.fullMeals = action.payload.meals;
+        state.status = LoadingStatus.success;
+      })
+      .addCase(getFullMeals.rejected, (state) => {
         state.status = LoadingStatus.failed;
       });
   },

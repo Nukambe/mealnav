@@ -8,6 +8,7 @@ import Calendar from '../features/calendar/Calendar';
 import Button from '../components/shared/Buttons/Button';
 import clsx from 'clsx';
 import MealList from '../features/meal-list/MealList';
+import Macros from '../features/macros/Macros';
 
 const now = new Date();
 const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
@@ -15,7 +16,17 @@ const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 export default function CalendarPage() {
   const dispatch = useAppDispatch();
   const mealplan = useAppSelector(selectMealplan);
-  const [selectedDate, setSelectedDate] = React.useState<Date | null>(null);
+  const [selectedDate, setSelectedDate] = React.useState<Date | null>(today);
+
+  const plan = React.useMemo(
+    () =>
+      mealplan.filter((plan) => {
+        const date = new Date(plan.date).toUTCString().slice(0, 16);
+        const selected = selectedDate!.toUTCString().slice(0, 16);
+        return date === selected;
+      }),
+    [mealplan, selectedDate],
+  );
 
   React.useEffect(() => {
     dispatch(getMealplan());
@@ -32,6 +43,7 @@ export default function CalendarPage() {
             {selectedDate?.toLocaleDateString() || 'today'}
           </time>
         </h2>
+        <Macros plan={plan} />
         <MealList selectedDate={selectedDate || today} />
       </section>
       <div className="md:pl-4 w-full md:w-1/2">

@@ -1,8 +1,7 @@
 import React from 'react';
-import Button from '../../components/shared/Buttons/Button';
 import csrfFetch from '../../app/fetch';
 import Cookies from 'js-cookie';
-import { redirect, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function ProfileDropdown() {
   const navigate = useNavigate();

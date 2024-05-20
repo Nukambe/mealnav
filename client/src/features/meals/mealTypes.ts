@@ -6,7 +6,14 @@ export type Meal = {
   prepTime: string;
   cookTime: string;
   cookingMethod: string[];
-  nutrition: nutrition;
+  calories: number;
+  fat: number;
+  protein: number;
+  carbs: number;
+  sugar: number;
+  fiber: number;
+  cholesterol: number;
+  sodium: number;
   recipeCategory: string;
   recipeCuisine: string;
   recipeInstructions: howToStep[];
@@ -85,4 +92,5 @@ export type SearchMealDto = {
   maxCholesterol?: string;
   minSodium?: string;
   maxSodium?: string;
+  fullDetails?: string;
 };

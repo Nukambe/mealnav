@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { CreateMealplanDto } from './dto/create-mealplan.dto';
 import { UpdateMealplanDto } from './dto/update-mealplan.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -66,8 +66,44 @@ export class MealplanService {
     return `This action returns a #${id} mealplan`;
   }
 
-  update(id: number, updateMealplanDto: UpdateMealplanDto) {
-    return `This action updates a #${id} mealplan`;
+  async update(req: Request, updateMealplanDto: UpdateMealplanDto) {
+    const { date, mealId, add } = updateMealplanDto;
+    const meal = await this.mealRepository.findOne({
+      select: ['id'],
+      where: { id: mealId },
+    });
+
+    const userId = (req.user as JwtPayload).sub;
+    const user = await this.userRepository.findOne({
+      select: ['id'],
+      where: { id: userId },
+    });
+
+    if (add) {
+      await this.mealplanRepository.save({
+        date: new Date(date).toUTCString(),
+        meal,
+        user,
+      });
+    } else {
+      const mealPlan = await this.mealplanRepository.findOne({
+        where: { date: new Date(date), meal, user },
+      });
+      if (mealPlan) {
+        await this.mealplanRepository.remove(mealPlan);
+      }
+    }
+
+    const mealplans = await this.mealplanRepository.find({
+      where: { user },
+      relations: ['meal'],
+    });
+
+    return mealplans.map((mp) => ({
+      id: mp.id,
+      date: mp.date,
+      meal: new MealDto(mp.meal),
+    }));
   }
 
   remove(id: number) {

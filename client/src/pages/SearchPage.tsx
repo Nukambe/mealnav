@@ -49,9 +49,9 @@ export default function SearchPage() {
               Meals
             </h1>
             <p className="mt-4 max-w-xl text-sm text-gray-700">
-              Our thoughtfully designed workspace objects are crafted in limited
-              runs. Improve your productivity and organization with these sale
-              items before we run out.
+              Simplify your meal planning with our curated recipes and meal
+              suggestions. Enhance your culinary journey and enjoy a healthier
+              lifestyle with our tailored meal plans.
             </p>
           </div>
         </div>

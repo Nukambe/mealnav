@@ -34,12 +34,9 @@ export class MealplanController {
     return this.mealplanService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateMealplanDto: UpdateMealplanDto,
-  ) {
-    return this.mealplanService.update(+id, updateMealplanDto);
+  @Patch()
+  update(@Body() updateMealplanDto: UpdateMealplanDto, @Request() req: any) {
+    return this.mealplanService.update(req, updateMealplanDto);
   }
 
   @Delete(':id')

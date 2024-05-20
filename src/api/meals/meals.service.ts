@@ -30,13 +30,17 @@ export class MealsService {
   }
 
   async findAll(searchMealDto: SearchMealDto) {
+    const fullDetails = +searchMealDto.fullDetails === 1;
+
     const [meals, count] = await this.mealsRepository.findAndCount({
-      select: {
-        id: true,
-        name: true,
-        description: true,
-        image: true,
-      },
+      select: fullDetails
+        ? undefined
+        : {
+            id: true,
+            name: true,
+            description: true,
+            image: true,
+          },
       where: {
         id: this.whereInArray(searchMealDto.ids, 'number'),
         name: this.whereName(searchMealDto.name),
@@ -91,8 +95,7 @@ export class MealsService {
 
   async findOne(id: number) {
     const meal = await this.mealsRepository.findOneBy({ id });
-    const mealDetail = new MealDetailDto(meal);
-    return mealDetail;
+    return meal;
   }
 
   update(id: number, updateMealDto: UpdateMealDto) {

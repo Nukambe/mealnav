@@ -26,7 +26,7 @@ export default function Calendar({
   }, [currentMonth, currentYear]);
 
   return (
-    <div className="mb-10 text-center">
+    <div className="text-center">
       <CalendarNav
         currentMonth={currentMonth}
         setCurrentMonth={setCurrentMonth}

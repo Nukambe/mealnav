@@ -28,6 +28,20 @@ export const getMealplan = createAsyncThunk(
   },
 );
 
+export const updateMealplan = createAsyncThunk(
+  'mealplan/updateMealplan',
+  async (plan: { date: string; mealId: number; add: boolean }) => {
+    const updatedPlan = await csrfFetch('/api/mealplan', {
+      method: 'PATCH',
+      headers: {
+        Authorization: `bearer ${Cookies.get('refreshToken')}`,
+      },
+      body: JSON.stringify(plan),
+    });
+    return updatedPlan;
+  },
+);
+
 export const mealplanSlice = createSlice({
   name: 'mealplan',
   initialState,
@@ -52,6 +66,19 @@ export const mealplanSlice = createSlice({
         },
       )
       .addCase(getMealplan.rejected, (state) => {
+        state.status = LoadingStatus.failed;
+      })
+      .addCase(updateMealplan.pending, (state) => {
+        state.status = LoadingStatus.loading;
+      })
+      .addCase(
+        updateMealplan.fulfilled,
+        (state, action: PayloadAction<Mealplan[]>) => {
+          state.plan = action.payload;
+          state.status = LoadingStatus.success;
+        },
+      )
+      .addCase(updateMealplan.rejected, (state) => {
         state.status = LoadingStatus.failed;
       });
   },

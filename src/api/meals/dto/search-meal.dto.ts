@@ -32,4 +32,5 @@ export type SearchMealDto = {
   maxCholesterol?: string;
   minSodium?: string;
   maxSodium?: string;
+  fullDetails?: number;
 };

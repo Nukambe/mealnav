@@ -17,10 +17,11 @@ export default function MealList({
 
   const meals = React.useMemo(
     () =>
-      mealplan.filter(
-        (plan) =>
-          new Date(plan.date).toDateString() === selectedDate.toDateString(),
-      ),
+      mealplan.filter((plan) => {
+        const date = new Date(plan.date).toUTCString().slice(0, 16);
+        const selected = selectedDate!.toUTCString().slice(0, 16);
+        return date === selected;
+      }),
     [mealplan, selectedDate],
   );
 
