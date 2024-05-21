@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../app/hooks';
 import { selectMeals } from '../meals/mealsSlice';
 import { MealDto } from '../meals/mealTypes';
+import Macros from '../macros/Macros';
 
 export default function MealGrid() {
   const meals = useAppSelector(selectMeals);
@@ -26,18 +27,25 @@ export default function MealGrid() {
 
 function MealCard({ meal }: { meal: MealDto }) {
   return (
-    <Link key={meal.id} to={`/app/meals/${meal.id}`} className="group">
-      <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+    <Link
+      key={meal.id}
+      to={`/app/meals/${meal.id}`}
+      className="group h-64 flex flex-col border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition duration-300 ease-in-out"
+    >
+      <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-t-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
         <img
           src={meal.image}
           alt={meal.name}
-          className="h-full w-full object-cover object-center group-hover:opacity-75"
+          className="w-full h-32 object-cover object-center group-hover:opacity-75"
         />
       </div>
-      <h3 className="mt-4 text-sm text-gray-700">{meal.name}</h3>
-      <p className="mt-1 text-lg font-medium text-gray-900">
+      <h3 className="mt-4 text-sm text-gray-700 px-2">{meal.name}</h3>
+      {/* <p className="mt-1 text-lg font-medium text-gray-900 h-24">
         {meal.description}
-      </p>
+      </p> */}
+      <div className="mt-auto p-2">
+        <Macros plan={[{ id: meal.id, date: new Date(), meal: meal }]} />
+      </div>
     </Link>
   );
 }

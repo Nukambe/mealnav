@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useAppSelector } from '../app/hooks';
 import { getMealById } from '../features/meals/mealsSlice';
 import MealDetailHeader from '../features/meal-detail/MealDetailHeader';
-import FavoriteButton from '../components/shared/Buttons/FavoriteButton';
+// import FavoriteButton from '../components/shared/Buttons/FavoriteButton';
 import AddMealButton from '../components/shared/Buttons/AddMealButton';
 import MealDetailNutrition from '../features/meal-detail/MealDetailNutrition';
 import MealDetailInstructions from '../features/meal-detail/MealDetailInstructions';

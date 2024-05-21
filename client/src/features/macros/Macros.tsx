@@ -21,13 +21,14 @@ export default function Macros({ plan }: { plan: Mealplan[] }) {
   React.useEffect(() => {
     if (meals.length === 0) return;
 
-    const missingMeals = meals
-      .filter((meal) => !meal.fullMeal)
-      .map((meal) => meal.meal.id);
+    const missingMeals = new Set<number>();
+    meals.forEach((meal) => {
+      if (meal.fullMeal === undefined) missingMeals.add(meal.meal.id);
+    });
 
-    if (missingMeals.length === 0) return;
+    if (missingMeals.size === 0) return;
 
-    dispatch(getFullMeals(missingMeals));
+    dispatch(getFullMeals(Array.from(missingMeals)));
   }, [meals, dispatch]);
 
   const totalMacros = React.useMemo(() => {
