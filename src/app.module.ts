@@ -23,6 +23,10 @@ import { join } from 'path';
       database: process.env.DB_NAME,
       entities: ['dist/**/*.entity{.ts,.js}'],
       synchronize: process.env.NODE_ENV === 'development',
+      ssl:
+        process.env.NODE_ENV === 'production'
+          ? { rejectUnauthorized: false }
+          : false,
     }),
     AuthModule,
     UsersModule,
