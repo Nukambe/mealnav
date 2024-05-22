@@ -1,11 +1,17 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { Mealplan } from '../meal-plan/mealplanTypes';
-import { getFullMeals, selectFullMeals } from '../meals/mealsSlice';
+import {
+  LoadingStatus,
+  getFullMeals,
+  selectFullMeals,
+  selectMealsStatus,
+} from '../meals/mealsSlice';
 
 export default function Macros({ plan }: { plan: Mealplan[] }) {
   const dispatch = useAppDispatch();
   const fullMeals = useAppSelector(selectFullMeals);
+  const status = useAppSelector(selectMealsStatus);
 
   const meals = React.useMemo(
     () =>
@@ -19,6 +25,7 @@ export default function Macros({ plan }: { plan: Mealplan[] }) {
   );
 
   React.useEffect(() => {
+    if (status === LoadingStatus.loading) return;
     if (meals.length === 0) return;
 
     const missingMeals = new Set<number>();
@@ -29,7 +36,7 @@ export default function Macros({ plan }: { plan: Mealplan[] }) {
     if (missingMeals.size === 0) return;
 
     dispatch(getFullMeals(Array.from(missingMeals)));
-  }, [meals, dispatch]);
+  }, [meals, dispatch, status]);
 
   const totalMacros = React.useMemo(() => {
     if (meals.length === 0)

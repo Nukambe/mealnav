@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../app/hooks';
-import { selectMeals } from '../meals/mealsSlice';
+import { selectFullMeals, selectMeals } from '../meals/mealsSlice';
 import { MealDto } from '../meals/mealTypes';
 import Macros from '../macros/Macros';
 
 export default function MealGrid() {
-  const meals = useAppSelector(selectMeals);
+  const meals = useAppSelector(selectFullMeals);
 
   return (
     <section

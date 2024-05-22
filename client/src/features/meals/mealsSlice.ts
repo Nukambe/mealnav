@@ -24,10 +24,11 @@ const initialState: MealsState = {
 export const getAllMeals = createAsyncThunk(
   'meals/getAllMeals',
   async (query: MealTypes.SearchMealDto) => {
-    query.fullDetails = '0';
+    query.fullDetails = query.fullDetails || '0';
     const meals = await csrfFetch(
       `/api/meals?${new URLSearchParams(query).toString()}`,
     );
+    console.log(meals);
     return meals;
   },
 );
@@ -35,10 +36,13 @@ export const getAllMeals = createAsyncThunk(
 export const getFullMeals = createAsyncThunk(
   'meals/getFullMeals',
   async (ids: number[]) => {
-    const meals = await csrfFetch(
-      `/api/meals?${new URLSearchParams({ ids: ids.join(','), fullDetails: '1' })}`,
+    const storeMeals = store.getState().meals.fullMeals;
+    const missingMeals = ids.filter(
+      (id) => !storeMeals.find((meal) => meal.id === id),
     );
-    console.log(meals);
+    const meals = await csrfFetch(
+      `/api/meals?${new URLSearchParams({ ids: missingMeals.join(','), fullDetails: '1' })}`,
+    );
     return meals;
   },
 );
@@ -48,7 +52,7 @@ export const getMealById = createAsyncThunk(
   async (id: number) => {
     const storeMeal = store
       .getState()
-      .meals.fullMeals.find((meal) => meal.id === id);
+      .meals.fullMeals.find((meal) => meal.id === +id);
     if (storeMeal) {
       return storeMeal;
     }
@@ -74,6 +78,13 @@ export const mealsSlice = createSlice({
         state.status = LoadingStatus.loading;
       })
       .addCase(getAllMeals.fulfilled, (state, action: PayloadAction<any>) => {
+        // action.payload.meals.forEach((meal: MealTypes.Meal) => {
+        //   const existingMeal = state.fullMeals.find((m) => m.id === meal.id);
+        //   if (!existingMeal) {
+        //     state.fullMeals.push(meal);
+        //   }
+        // });
+        state.fullMeals = action.payload.meals;
         state.meals = action.payload.meals;
         state.status = LoadingStatus.success;
       })
@@ -100,7 +111,12 @@ export const mealsSlice = createSlice({
         state.status = LoadingStatus.loading;
       })
       .addCase(getFullMeals.fulfilled, (state, action: PayloadAction<any>) => {
-        state.fullMeals.push(...action.payload.meals);
+        action.payload.meals.forEach((meal: MealTypes.Meal) => {
+          const existingMeal = state.fullMeals.find((m) => m.id === meal.id);
+          if (!existingMeal) {
+            state.fullMeals.push(meal);
+          }
+        });
         state.status = LoadingStatus.success;
       })
       .addCase(getFullMeals.rejected, (state) => {
@@ -116,6 +132,6 @@ export const { setMeals } = mealsSlice.actions;
 // in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
 export const selectMeals = (state: RootState) => state.meals.meals;
 export const selectFullMeals = (state: RootState) => state.meals.fullMeals;
-export const selectStatus = (state: RootState) => state.meals.status;
+export const selectMealsStatus = (state: RootState) => state.meals.status;
 
 export default mealsSlice.reducer;
