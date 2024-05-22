@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../app/hooks';
-import { selectFullMeals, selectMeals } from '../meals/mealsSlice';
+import { selectFullMeals } from '../meals/mealsSlice';
 import { MealDto } from '../meals/mealTypes';
 import Macros from '../macros/Macros';
 

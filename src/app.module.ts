@@ -8,6 +8,8 @@ import { UsersModule } from './api/users/users.module';
 import { MealsModule } from './api/meals/meals.module';
 import { MealplanModule } from './api/mealplan/mealplan.module';
 import { CategoriesModule } from './api/categories/categories.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -20,13 +22,17 @@ import { CategoriesModule } from './api/categories/categories.module';
       password: process.env.DB_PASS,
       database: process.env.DB_NAME,
       entities: ['dist/**/*.entity{.ts,.js}'],
-      synchronize: true, // DO NOT USE IN PRODUCTION
+      synchronize: process.env.NODE_ENV === 'development',
     }),
     AuthModule,
     UsersModule,
     MealsModule,
     MealplanModule,
     CategoriesModule,
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'client', 'build'),
+      exclude: ['/api/(.*)'],
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -43,7 +43,6 @@ export default function Routes() {
           path: 'meals',
           // element: <MealsPage />,
           element: <SearchPage />,
-          loader: mealsLoader(dispatch),
         },
         {
           path: 'meals/:id',

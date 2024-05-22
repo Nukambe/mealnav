@@ -1,9 +1,8 @@
 import React from 'react';
-import clsx from 'clsx';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { selectSortOptions, setSortOption } from './searchSlice';
+import { useAppSelector } from '../../app/hooks';
+import { selectSortOptions } from './searchSlice';
 import Button from '../../components/shared/Buttons/Button';
-import { SortOption, SortOptions } from './searchTypes';
+import { SortOptions } from './searchTypes';
 import SortInput from './SortInput';
 
 export default function SortButton() {
