@@ -2,7 +2,6 @@ import React from 'react';
 import { useAppSelector } from '../../app/hooks';
 import { selectActiveFilters, selectFilterOptions } from './searchSlice';
 import { FilterOptions } from './searchTypes';
-import { initialState as emptySearch } from './searchSlice';
 import FilterInput from './FilterInput';
 
 export default function FilterButton() {

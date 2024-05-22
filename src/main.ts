@@ -12,6 +12,6 @@ async function bootstrap() {
   app.use(cookieParser(process.env.COOKIE_SECRET));
   app.use(doubleCsrfProtection);
   app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
-  await app.listen(3005);
+  await app.listen(process.env.PORT || 3005);
 }
 bootstrap();
