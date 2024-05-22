@@ -24,7 +24,7 @@ export default function CreateMealPage() {
         alert('Failed to create meal');
       }
     } catch (err) {
-      setError('Failed to create meal');
+      setError(error);
     } finally {
       setLoading(false);
     }
@@ -37,6 +37,7 @@ export default function CreateMealPage() {
         className="flex flex-col max-w-xl m-auto gap-4 p-4"
         id="create-form"
         onSubmit={handleSubmit}
+        style={{ pointerEvents: loading ? 'none' : 'auto' }}
       >
         <div>
           <label htmlFor="name">Name</label>

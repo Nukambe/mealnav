@@ -4,8 +4,6 @@ import MobileMenuButton from './MobileMenuButton';
 import ProfileDropdown from './ProfileDropdown';
 import Search from './Search';
 import { navigation } from './navigation';
-import clsx from 'clsx';
-import { NavLink } from 'react-router-dom';
 import NavigationLink from './NavigationLink';
 
 export default function Navigation() {
