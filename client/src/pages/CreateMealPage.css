@@ -1,0 +1,26 @@
+#create-form > div,
+#create-form label {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+#create-form li {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin: 32px 0;
+}
+
+#create-form button {
+  margin: 32px 0;
+  background-color: rgb(125, 125, 255);
+  border: 1px solid #f5f5f5;
+  border-radius: 5px;
+  padding: 8px 16px;
+  font-size: 1rem;
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+}
