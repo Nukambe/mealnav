@@ -100,7 +100,7 @@ export const mealsSlice = createSlice({
         state.status = LoadingStatus.loading;
       })
       .addCase(getFullMeals.fulfilled, (state, action: PayloadAction<any>) => {
-        state.fullMeals = action.payload.meals;
+        state.fullMeals.push(...action.payload.meals);
         state.status = LoadingStatus.success;
       })
       .addCase(getFullMeals.rejected, (state) => {

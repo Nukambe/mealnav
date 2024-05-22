@@ -10,6 +10,7 @@ import CalendarPage from './pages/CalendarPage';
 import MealsPage, { loader as mealsLoader } from './pages/MealsPage';
 import MealPage, { loader as mealLoader } from './pages/MealPage';
 import SearchPage from './pages/SearchPage';
+import CreateMealPage from './pages/CreateMealPage';
 
 export default function Routes() {
   const dispatch = useAppDispatch();
@@ -52,6 +53,10 @@ export default function Routes() {
         {
           path: 'search',
           element: <SearchPage />,
+        },
+        {
+          path: 'create',
+          element: <CreateMealPage />,
         },
       ],
     },

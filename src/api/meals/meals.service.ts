@@ -25,6 +25,10 @@ export class MealsService {
   ) {}
 
   async create(createMealDto: CreateMealDto) {
+    createMealDto.aggregateRating = createMealDto.aggregateRating || {
+      ratingValue: 0,
+      ratingCount: 0,
+    };
     const meal = await this.mealsRepository.save(createMealDto);
     return meal;
   }

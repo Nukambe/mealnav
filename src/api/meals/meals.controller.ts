@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   Query,
+  HttpCode,
 } from '@nestjs/common';
 import { MealsService } from './meals.service';
 import { CreateMealDto } from './dto/create-meal.dto';
@@ -17,6 +18,7 @@ import { SearchMealDto } from './dto/search-meal.dto';
 export class MealsController {
   constructor(private readonly mealsService: MealsService) {}
 
+  @HttpCode(200)
   @Post()
   create(@Body() createMealDto: CreateMealDto) {
     return this.mealsService.create(createMealDto);
