@@ -1,9 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import csrfFetch from '../../app/fetch';
-import Cookies from 'js-cookie';
 import { redirect } from 'react-router-dom';
-import { stat } from 'fs';
 
 export enum Status {
   loggedOut,
@@ -35,7 +33,7 @@ const initialState: UserState = {
 export const signup = createAsyncThunk(
   'user/signup',
   async (user: { email: string; password: string; name: string }) => {
-    const data = await csrfFetch('/api/users/signup', {
+    const data = await csrfFetch('/api/users', {
       method: 'POST',
       body: JSON.stringify({ ...user }),
     });
