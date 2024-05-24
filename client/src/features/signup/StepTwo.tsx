@@ -26,18 +26,26 @@ export default function StepTwo({
         />
 
         <div>
-          <p>Your password must contain at least</p>
-          <ul>
+          <p>Your password must contain at least:</p>
+          <ul className="list-disc list-inside">
             <li>10 characters</li>
             <li>1 letter</li>
-            <li>1 number or special character (example: # ? ! &)</li>
+            <li>1 number</li>
           </ul>
         </div>
 
         <Button
           type="submit"
           className="flex w-full justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
-          onClick={next}
+          onClick={() => {
+            const validPassword =
+              /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{10,}$/.test(password);
+            if (validPassword) {
+              next();
+            } else {
+              alert('Please enter a valid password');
+            }
+          }}
         >
           Next
         </Button>

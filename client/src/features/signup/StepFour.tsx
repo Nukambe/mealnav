@@ -25,11 +25,21 @@ export default function StepFour({
 
         <p>
           By signing up, you agree to our{' '}
-          <a href="/" className="text-green-600">
+          <a
+            href="https://www.wesleychappell.com/"
+            className="text-green-600"
+            target="_blank"
+            rel="noreferrer nofollow"
+          >
             Terms and Conditions
           </a>{' '}
           and{' '}
-          <a href="/" className="text-green-600">
+          <a
+            href="https://www.linkedin.com/in/weschap/"
+            className="text-green-600"
+            target="_blank"
+            rel="noreferrer nofollow"
+          >
             Privacy Policy
           </a>
         </p>
@@ -37,8 +47,9 @@ export default function StepFour({
         <div>
           <button
             type="submit"
-            className="flex w-full justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
+            className="flex w-full justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600 disabled:opacity-50 disabled:cursor-not-allowed"
             onClick={onSubmit}
+            disabled={!terms}
           >
             Sign Up
           </button>

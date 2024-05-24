@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 import Navigation from './features/navigation/Navigation';
 import './App.css';
 
-export async function loader() {
+export async function loader(dispatch: any) {
   const refreshToken = Cookies.get('refreshToken');
   if (!refreshToken) return redirect('/signin');
 
@@ -16,7 +16,6 @@ export async function loader() {
   });
 
   if (data.accessToken && data.refreshToken) {
-    console.log('refresh token', data.refreshToken);
     return null;
   }
 

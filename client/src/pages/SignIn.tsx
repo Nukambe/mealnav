@@ -4,10 +4,11 @@ import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { selectStatus, signin, Status } from '../features/user/userSlice';
 import Button from '../components/shared/Buttons/Button';
 import FormInput from '../components/shared/Form/FormInput';
-import Sso from '../features/sso/Sso';
+// import Sso from '../features/sso/Sso';
 import csrfFetch from '../app/fetch';
 import Cookies from 'js-cookie';
 import { redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export async function loader() {
   const refreshToken = Cookies.get('refreshToken');
@@ -41,17 +42,21 @@ export default function SignIn() {
   };
 
   React.useEffect(() => {
-    if (status === Status.loggedIn) navigate('/app');
+    const accessToken = Cookies.get('accessToken');
+    const refreshToken = Cookies.get('refreshToken');
+    if (accessToken && refreshToken) {
+      navigate('/app');
+    }
   }, [status, navigate]);
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <img
+        {/* <img
           className="mx-auto h-10 w-auto"
           src="https://tailwindui.com/img/logos/mark.svg?color=green&shade=600"
           alt="Your Company"
-        />
+        /> */}
         <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
           Sign in to your account
         </h2>
@@ -125,12 +130,12 @@ export default function SignIn() {
 
         <p className="mt-10 text-center text-sm text-gray-500">
           Not a member?{' '}
-          <a
-            href="/"
+          <Link
+            to={'/signup'}
             className="font-semibold leading-6 text-green-600 hover:text-green-500"
           >
             Start a 14 day free trial
-          </a>
+          </Link>
         </p>
       </div>
     </div>

@@ -27,6 +27,11 @@ export default function FormInput({
           placeholder={props.placeholder}
           value={props.value}
           onChange={props.onChange}
+          style={{
+            // backgroundColor: '#f7fafc',
+            width: props.type === 'checkbox' ? '1.5em' : '100%',
+            height: props.type === 'checkbox' ? '1.5em' : '2.5em',
+          }}
         />
       </div>
     </div>
