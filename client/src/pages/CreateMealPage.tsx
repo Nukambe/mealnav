@@ -91,15 +91,32 @@ export default function CreateMealPage() {
         </div>
         <div>
           <label htmlFor="cookingMethod">Cooking Method</label>
-          <input
-            type="text"
+          <select
             id="cookingMethod"
             name="cookingMethod"
-            value={meal.cookingMethod?.join(',')}
+            value={meal.cookingMethod?.[0]}
             onChange={(e) =>
-              setMeal({ ...meal, cookingMethod: e.target.value.split(',') })
+              setMeal({ ...meal, cookingMethod: [e.target.value] })
             }
-          />
+          >
+            <option value="Steaming">Steaming</option>
+            <option value="Roasting">Roasting</option>
+            <option value="Boiling">Boiling</option>
+            <option value="Frying">Frying</option>
+            <option value="Poaching">Poaching</option>
+            <option value="Simmering">Simmering</option>
+            <option value="Braising">Braising</option>
+            <option value="Broiling">Broiling</option>
+            <option value="Baking">Baking</option>
+            <option value="Sauteing">Sauteing</option>
+            <option value="Grilling">Grilling</option>
+            <option value="Stir-frying">Stir-frying</option>
+            <option value="Microwaving">Microwaving</option>
+            <option value="Pressure cooking">Pressure cooking</option>
+            <option value="Slow cooking">Slow cooking</option>
+            <option value="Smoking">Smoking</option>
+            <option value="Searing">Searing</option>
+          </select>
         </div>
         <div>
           <label htmlFor="calories">Calories</label>
@@ -199,60 +216,93 @@ export default function CreateMealPage() {
         </div>
         <div>
           <label htmlFor="recipeCategory">Recipe Category</label>
-          <input
-            type="text"
+          <select
             id="recipeCategory"
             name="recipeCategory"
             value={meal.recipeCategory}
             onChange={(e) =>
               setMeal({ ...meal, recipeCategory: e.target.value })
             }
-          />
+          >
+            <option value="Breakfast">Breakfast</option>
+            <option value="Lunch">Lunch</option>
+            <option value="Dinner">Dinner</option>
+            <option value="Snack">Snack</option>
+            <option value="Appetizer">Appetizer</option>
+            <option value="Dessert">Dessert</option>
+            <option value="Side">Side</option>
+            <option value="Main Course">Main Course</option>
+            <option value="Drink">Drink</option>
+          </select>
         </div>
         <div>
           <label htmlFor="recipeCuisine">Recipe Cuisine</label>
-          <input
-            type="text"
+          <select
             id="recipeCuisine"
             name="recipeCuisine"
             value={meal.recipeCuisine}
             onChange={(e) =>
               setMeal({ ...meal, recipeCuisine: e.target.value })
             }
-          />
+          >
+            <option value="African">African</option>
+            <option value="American">American</option>
+            <option value="British">British</option>
+            <option value="Cajun">Cajun</option>
+            <option value="Caribbean">Caribbean</option>
+            <option value="Chinese">Chinese</option>
+            <option value="Eastern European">Eastern European</option>
+            <option value="European">European</option>
+            <option value="French">French</option>
+            <option value="German">German</option>
+          </select>
         </div>
         <div>
           <label htmlFor="recipeInstructions">Recipe Instructions</label>
-          <ol>
-            {meal.recipeInstructions?.map((instruction, index) => (
-              <li key={index}>
-                <label>
-                  Name
-                  <input
-                    type="text"
-                    value={instruction.name}
-                    onChange={(e) => {
+          {meal.recipeInstructions?.length > 0 ? (
+            <ol>
+              {meal.recipeInstructions?.map((instruction, index) => (
+                <li key={index}>
+                  <label>
+                    Name
+                    <input
+                      type="text"
+                      value={instruction.name}
+                      onChange={(e) => {
+                        const instructions = [...meal.recipeInstructions];
+                        instructions[index].name = e.target.value;
+                        setMeal({ ...meal, recipeInstructions: instructions });
+                      }}
+                    />
+                  </label>
+                  <label>
+                    Text
+                    <input
+                      type="text"
+                      value={instruction.text}
+                      onChange={(e) => {
+                        const instructions = [...meal.recipeInstructions];
+                        instructions[index].text = e.target.value;
+                        setMeal({ ...meal, recipeInstructions: instructions });
+                      }}
+                    />
+                  </label>
+                  <button
+                    type="button"
+                    onClick={() => {
                       const instructions = [...meal.recipeInstructions];
-                      instructions[index].name = e.target.value;
+                      instructions.splice(index, 1);
                       setMeal({ ...meal, recipeInstructions: instructions });
                     }}
-                  />
-                </label>
-                <label>
-                  Text
-                  <input
-                    type="text"
-                    value={instruction.text}
-                    onChange={(e) => {
-                      const instructions = [...meal.recipeInstructions];
-                      instructions[index].text = e.target.value;
-                      setMeal({ ...meal, recipeInstructions: instructions });
-                    }}
-                  />
-                </label>
-              </li>
-            ))}
-          </ol>
+                  >
+                    Remove
+                  </button>
+                </li>
+              ))}
+            </ol>
+          ) : (
+            <div className="empty">No instructions</div>
+          )}
           <button
             type="button"
             onClick={() =>
@@ -281,59 +331,79 @@ export default function CreateMealPage() {
         </div>
         <div>
           <label htmlFor="suitableForDiet">Suitable For Diet</label>
-          <input
-            type="text"
+          <select
             id="suitableForDiet"
             name="suitableForDiet"
             value={meal.suitableForDiet?.join(',')}
             onChange={(e) =>
               setMeal({ ...meal, suitableForDiet: e.target.value.split(',') })
             }
-          />
+          >
+            <option value="Diabetic">Diabetic</option>
+            <option value="Halal">Halal</option>
+            <option value="Vegan">Vegan</option>
+            <option value="Vegetarian">Vegetarian</option>
+            <option value="Kosher">Kosher</option>
+            <option value="Keto">Keto</option>
+          </select>
         </div>
         <label htmlFor="recipeIngredient">Recipe Ingredients</label>
-        <ol>
-          {meal.recipeIngredient?.map((ingredient, index) => (
-            <li key={index}>
-              <label>
-                Name
-                <input
-                  type="text"
-                  value={ingredient.name}
-                  onChange={(e) => {
+        {meal.recipeIngredient?.length > 0 ? (
+          <ol>
+            {meal.recipeIngredient?.map((ingredient, index) => (
+              <li key={index}>
+                <label>
+                  Name
+                  <input
+                    type="text"
+                    value={ingredient.name}
+                    onChange={(e) => {
+                      const ingredients = [...meal.recipeIngredient];
+                      ingredients[index].name = e.target.value;
+                      setMeal({ ...meal, recipeIngredient: ingredients });
+                    }}
+                  />
+                </label>
+                <label>
+                  Quantity
+                  <input
+                    type="number"
+                    value={ingredient.quantity}
+                    onChange={(e) => {
+                      const ingredients = [...meal.recipeIngredient];
+                      ingredients[index].quantity = +e.target.value;
+                      setMeal({ ...meal, recipeIngredient: ingredients });
+                    }}
+                  />
+                </label>
+                <label>
+                  Unit
+                  <input
+                    type="text"
+                    value={ingredient.unit}
+                    onChange={(e) => {
+                      const ingredients = [...meal.recipeIngredient];
+                      ingredients[index].unit = e.target.value;
+                      setMeal({ ...meal, recipeIngredient: ingredients });
+                    }}
+                  />
+                </label>
+                <button
+                  type="button"
+                  onClick={() => {
                     const ingredients = [...meal.recipeIngredient];
-                    ingredients[index].name = e.target.value;
+                    ingredients.splice(index, 1);
                     setMeal({ ...meal, recipeIngredient: ingredients });
                   }}
-                />
-              </label>
-              <label>
-                Quantity
-                <input
-                  type="number"
-                  value={ingredient.quantity}
-                  onChange={(e) => {
-                    const ingredients = [...meal.recipeIngredient];
-                    ingredients[index].quantity = +e.target.value;
-                    setMeal({ ...meal, recipeIngredient: ingredients });
-                  }}
-                />
-              </label>
-              <label>
-                Unit
-                <input
-                  type="text"
-                  value={ingredient.unit}
-                  onChange={(e) => {
-                    const ingredients = [...meal.recipeIngredient];
-                    ingredients[index].unit = e.target.value;
-                    setMeal({ ...meal, recipeIngredient: ingredients });
-                  }}
-                />
-              </label>
-            </li>
-          ))}
-        </ol>
+                >
+                  Remove
+                </button>
+              </li>
+            ))}
+          </ol>
+        ) : (
+          <div className="empty">No ingredients</div>
+        )}
         <button
           type="button"
           onClick={() =>
