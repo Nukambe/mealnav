@@ -4,10 +4,19 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { getFullMeals, selectFullMeals } from '../meals/mealsSlice';
 import Cookies from 'js-cookie';
 
-export default function ShoppingList({ plan }: { plan: Mealplan[] }) {
+export default function ShoppingList({
+  plan,
+  servings,
+  setServings,
+}: {
+  plan: Mealplan[];
+  servings: { mealId: number; servings: number }[];
+  setServings: React.Dispatch<
+    React.SetStateAction<{ mealId: number; servings: number }[]>
+  >;
+}) {
   const dispatch = useAppDispatch();
   const meals = useAppSelector(selectFullMeals);
-  const [servings, setServings] = React.useState<number[]>(plan.map(() => 1));
   const [cookie, setCookie] = React.useState(`shopped-${plan[0]?.date}`);
   const [shopped, setShopped] = React.useState<
     { name: string; checked: boolean }[]
@@ -20,7 +29,6 @@ export default function ShoppingList({ plan }: { plan: Mealplan[] }) {
     if (missingMeals.length) {
       dispatch(getFullMeals(missingMeals.map((mealPlan) => mealPlan.meal.id)));
     }
-    setServings(plan.map(() => 1));
   }, [plan, dispatch, meals]);
 
   // Update the cookie key whenever the plan changes
@@ -48,7 +56,7 @@ export default function ShoppingList({ plan }: { plan: Mealplan[] }) {
         if (!meal) return acc;
         const ingredients = meal.recipeIngredient.map((ingredient) => ({
           ...ingredient,
-          quantity: ingredient.quantity * servings[index],
+          quantity: ingredient.quantity * servings[index].servings,
         }));
         ingredients.forEach((ingredient) => {
           const accIngredient = acc.find(
@@ -69,7 +77,7 @@ export default function ShoppingList({ plan }: { plan: Mealplan[] }) {
   const handleServingsChange = (index: number, value: number) => {
     setServings((prev) => {
       const next = [...prev];
-      next[index] = value;
+      next[index].servings = value;
       return next;
     });
   };
@@ -79,8 +87,37 @@ export default function ShoppingList({ plan }: { plan: Mealplan[] }) {
       <h3 className="text-lg font-semibold leading-6 text-gray-900 mt-4">
         Shopping List ({totalIngredients.length} items)
       </h3>
+      <ul>
+        {servings.map((serving, index) => (
+          <li key={index} className="mt-4 flex justify-between items-center">
+            <h4 className="text-sm font-semibold leading-6 text-gray-900">
+              {meals.find((meal) => meal.id === serving.mealId)?.name ||
+                serving.mealId}
+            </h4>
+            <div className="flex items-center mt-2">
+              <label
+                htmlFor={`servings-${serving.mealId}`}
+                className="text-sm text-gray-900"
+              >
+                Servings:
+              </label>
+              <input
+                type="number"
+                min={1}
+                id={`servings-${serving.mealId}`}
+                className="w-16 h-8 text-sm text-center border border-gray-300 rounded-md ring-1 ring-gray-300 focus:ring-2 focus:ring-green-500 focus:outline-none ml-2"
+                value={servings[index].servings}
+                onChange={(e) =>
+                  handleServingsChange(index, parseInt(e.target.value, 10))
+                }
+              />
+            </div>
+          </li>
+        ))}
+      </ul>
+      <hr className="my-4 border-gray-300" />
       <ul className="mt-2 flex flex-col gap-2">
-        {totalIngredients.map((ingredient, index) => (
+        {totalIngredients.map((ingredient) => (
           <li key={ingredient.name} className="flex items-center">
             <input
               type="checkbox"
@@ -109,7 +146,9 @@ export default function ShoppingList({ plan }: { plan: Mealplan[] }) {
             />
             <span className="ml-2 text-sm text-gray-900">
               {ingredient.name} -{' '}
-              {ingredient.quantity > 0 ? ingredient.quantity : 'Preference'}{' '}
+              {ingredient.quantity > 0
+                ? ingredient.quantity.toFixed(2)
+                : 'Preference'}{' '}
               {ingredient.unit}
             </span>
           </li>

@@ -50,7 +50,7 @@ export default function CalendarNav({
         <span className="sr-only">Previous month</span>
         <ChevronLeft />
       </button>
-      <div className="flex-auto text-sm font-semibold">
+      <div className="flex-auto text-xl font-bold">
         {Month[currentMonth]} {currentYear}
       </div>
       <button

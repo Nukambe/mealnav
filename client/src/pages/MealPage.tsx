@@ -7,6 +7,7 @@ import AddMealButton from '../components/shared/Buttons/AddMealButton';
 import MealDetailNutrition from '../features/meal-detail/MealDetailNutrition';
 import MealDetailInstructions from '../features/meal-detail/MealDetailInstructions';
 import MealDetailIngredients from '../features/meal-detail/MealDetailIngredients';
+import React from 'react';
 
 export const loader =
   (dispatch: any) =>
