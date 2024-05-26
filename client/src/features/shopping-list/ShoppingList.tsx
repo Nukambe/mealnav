@@ -53,10 +53,12 @@ export default function ShoppingList({
     return plan.reduce(
       (acc, mealPlan, index) => {
         const meal = meals.find((meal) => meal.id === mealPlan.meal.id);
+        const serving =
+          servings.find((s) => s.mealId === mealPlan.meal.id)?.servings || 1;
         if (!meal) return acc;
         const ingredients = meal.recipeIngredient.map((ingredient) => ({
           ...ingredient,
-          quantity: ingredient.quantity * servings[index].servings,
+          quantity: ingredient.quantity * serving,
         }));
         ingredients.forEach((ingredient) => {
           const accIngredient = acc.find(
