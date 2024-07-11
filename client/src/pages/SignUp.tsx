@@ -51,6 +51,12 @@ export default function SignUp() {
       <div className="flex flex-1 flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
         <div className="mx-auto w-full max-w-sm lg:w-96">
           <div>
+            <a
+              href="/"
+              className="flex items-center justify-center bg-green-500 rounded-full p-2 text-white w-fit-content mx-auto mt-4 px-4 py-2 text-sm font-semibold leading-6 shadow-sm hover:bg-green-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
+            >
+              Return Home
+            </a>
             <h2 className="mt-8 text-2xl font-bold leading-9 tracking-tight text-gray-900">
               Sign up to start planning
             </h2>

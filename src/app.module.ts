@@ -22,7 +22,7 @@ import { join } from 'path';
       password: process.env.DB_PASS,
       database: process.env.DB_NAME,
       entities: ['dist/**/*.entity{.ts,.js}'],
-      synchronize: true,
+      synchronize: false,
       ssl:
         process.env.NODE_ENV === 'production'
           ? { rejectUnauthorized: false }

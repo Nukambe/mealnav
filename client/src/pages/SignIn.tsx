@@ -35,9 +35,11 @@ export default function SignIn() {
   const status = useAppSelector(selectStatus);
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [error, setError] = React.useState<boolean>(false);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError(false);
     dispatch(signin({ username: email, password }));
   };
 
@@ -47,20 +49,25 @@ export default function SignIn() {
     if (accessToken && refreshToken) {
       navigate('/app');
     }
+    if (status === Status.failed) {
+      setError(true);
+    }
   }, [status, navigate]);
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        {/* <img
-          className="mx-auto h-10 w-auto"
-          src="https://tailwindui.com/img/logos/mark.svg?color=green&shade=600"
-          alt="Your Company"
-        /> */}
         <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
           Sign in to your account
         </h2>
       </div>
+
+      <a
+        href="/"
+        className="flex items-center justify-center bg-green-500 rounded-full p-2 text-white w-fit-content mx-auto mt-4 px-4 py-2 text-sm font-semibold leading-6 shadow-sm hover:bg-green-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
+      >
+        Return Home
+      </a>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
         <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
@@ -89,32 +96,6 @@ export default function SignIn() {
               onChange={(e) => setPassword(e.target.value)}
             />
 
-            {/* <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <input
-                  id="remember-me"
-                  name="remember-me"
-                  type="checkbox"
-                  className="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-600"
-                />
-                <label
-                  htmlFor="remember-me"
-                  className="ml-3 block text-sm leading-6 text-gray-900"
-                >
-                  Remember me
-                </label>
-              </div>
-
-              <div className="text-sm leading-6">
-                <a
-                  href="/"
-                  className="font-semibold text-green-600 hover:text-green-500"
-                >
-                  Forgot password?
-                </a>
-              </div>
-            </div> */}
-
             <div>
               <Button
                 type="submit"
@@ -125,6 +106,11 @@ export default function SignIn() {
             </div>
           </form>
 
+          {error && (
+            <p className="text-red-500 text-sm mt-4">
+              Invalid Email Address or Password
+            </p>
+          )}
           {/* <Sso /> */}
         </div>
 

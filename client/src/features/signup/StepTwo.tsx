@@ -1,5 +1,6 @@
 import FormInput from '../../components/shared/Form/FormInput';
 import Button from '../../components/shared/Buttons/Button';
+import React from 'react';
 
 export default function StepTwo({
   password,
@@ -10,9 +11,11 @@ export default function StepTwo({
   setPassword: (password: string) => void;
   next: () => void;
 }) {
+  const [error, setError] = React.useState(false);
+
   return (
     <div>
-      <form action="#" method="POST" className="space-y-6">
+      <form action="#" method="#" className="space-y-6">
         <FormInput
           title="Password"
           label="password"
@@ -32,18 +35,24 @@ export default function StepTwo({
             <li>1 letter</li>
             <li>1 number</li>
           </ul>
+          {error && (
+            <p className="text-red-500 text-sm mt-4">
+              Please enter a valid password
+            </p>
+          )}
         </div>
 
         <Button
-          type="submit"
+          type="button"
           className="flex w-full justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
           onClick={() => {
+            setError(false);
             const validPassword =
               /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{10,}$/.test(password);
             if (validPassword) {
               next();
             } else {
-              alert('Please enter a valid password');
+              setError(true);
             }
           }}
         >

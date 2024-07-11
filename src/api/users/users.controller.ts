@@ -30,6 +30,12 @@ export class UsersController {
   }
 
   @HttpCode(HttpStatus.OK)
+  @Get('/email/:email')
+  findByEmail(@Param('email') email: string) {
+    return this.usersService.checkExists(email);
+  }
+
+  @HttpCode(HttpStatus.OK)
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(id);

@@ -27,7 +27,7 @@ export default function Hero() {
       <div className="mt-10 flex justify-center gap-x-6">
         {/* <Button href="/register">Get 2 months free</Button> */}
         <a
-          href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+          href="https://www.youtube.com/watch?v=_g7cr2x3GJU"
           target="_blank"
           rel="noreferrer"
           className="flex items-center text-green-600 group-active:text-green-700 bg-green-100 group-active:bg-green-200 px-4 py-2 rounded-md transition-colors duration-200 ease-in-out hover:bg-green-200 hover:text-green-700"

@@ -63,6 +63,11 @@ export class UsersService {
     return await this.usersRepository.findOneBy({ email });
   }
 
+  async checkExists(email: string) {
+    const user = await this.usersRepository.findOneBy({ email });
+    return { exists: !!user };
+  }
+
   safeUser(user: User) {
     const safeUser = JSON.parse(JSON.stringify(user));
     delete safeUser.password;

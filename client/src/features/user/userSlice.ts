@@ -55,6 +55,10 @@ export const signin = createAsyncThunk(
       body: JSON.stringify({ ...user }),
     });
 
+    if (data.statusCode && data.statusCode === 401) {
+      throw new Error('Invalid email or password');
+    }
+
     return data;
   },
 );
